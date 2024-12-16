@@ -1,0 +1,252 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+.auth-view {
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px black solid;
+  padding: 64px;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.form-input__reg {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.button-reg {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  flex-direction: column;
+
+}
+
+.form-input__reg_sex {}
+
+
+
+
+/* шапка */
+
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 628px;
+  padding: 60px 40px 40px 40px;
+  background: #1b4e36;
+}
+.user-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 15px;
+  position: relative;
+  width: 433px;
+}
+.user-photo {
+  flex-shrink: 0;
+  position: relative;
+  width: 106px;
+  height: 106px;
+  z-index: 1;
+}
+.ellipse {
+  position: absolute;
+  width: 106px;
+  height: 106px;
+  top: 0;
+  left: 0;
+  /* background: url(../assets/images/arrow_right.png)
+    no-repeat center; */
+  background-size: cover;
+  z-index: 2;
+  border-radius: 50%;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 10px;
+  position: relative;
+  width: 312px;
+  z-index: 3;
+}
+.ivanov-ivan-ivanovich {
+  align-self: stretch;
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  min-width: 0;
+  height: 23px;
+  color: #fdfbf8;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23px;
+  text-align: left;
+  white-space: wrap;
+  z-index: 4;
+}
+.role {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 8px;
+  position: relative;
+  width: 157px;
+  z-index: 5;
+}
+.role-1 {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 19px;
+  color: #fdfbf8;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18.75px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 6;
+}
+.user {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 19px;
+  color: #fdfbf8;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 7;
+}
+.role-2 {
+  display: flex;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 8px;
+  position: relative;
+  min-width: 0;
+  z-index: 8;
+}
+.residence {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 19px;
+  color: #fdfbf8;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18.75px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 9;
+}
+.address {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  width: 207px;
+  height: 38px;
+  color: #fdfbf8;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  text-align: left;
+  z-index: 10;
+}
+.icon-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 20px;
+  position: relative;
+  width: 100px;
+  z-index: 11;
+}
+.settings {
+  flex-shrink: 0;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  z-index: 12;
+}
+.settings:hover, .notifications:hover {
+  cursor: pointer;
+}
+.vector {
+  position: relative;
+  width: 30px;
+  height: 32px;
+  margin: 4px 0 0 5px;
+  background: url(../assets/images/shesterenka.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 13;
+}
+.notifications {
+  flex-shrink: 0;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  z-index: 14;
+}
+.vector-3 {
+  position: relative;
+  width: 30px;
+  height: 32px;
+  margin: 4px 0 0 5px;
+  background: url(../assets/images/kolokol.png)
+    no-repeat center;
+  background-size: 100% 100%;
+  z-index: 15;
+}
+.settings:hover .vector,
+.notifications:hover .vector-3 {
+  opacity: 0.8; /* Изменение при наведении */
+}
+/* конец шапки */
+
+.card_zakaz{
+  display: flex;
+  justify-content: space-between;
+  width: 804px;
+  padding: 10px;
+  width: 804px;
+  margin: 0 auto;
+  padding: 25px 25px 25px 25px;
+  background: #fdfbf8;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
+}
+
+.centerCart{
+  padding-left: 201px;
+}
