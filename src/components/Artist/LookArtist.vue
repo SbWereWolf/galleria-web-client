@@ -14,7 +14,7 @@
     />
 
     <!-- Выводим значение из Pinia для стиля realism -->
-    <p>Значение из Pinia: {{ realismValues.join(', ') }}</p>
+    <p>Значение из Pinia: {{ styleValues.join(', ') }}</p>
 
     <BaseButton size="large" variant="primary60" @click="handleSearch">
       Найти
@@ -78,9 +78,8 @@ const loadStyleOptions = async () => {
 };
 
 // Слушаем изменения в selectedValues.style и обновляем переменную a
-const realismValues = computed(() => selectedValues.realism || []); // Используем computed для отслеживания изменений
+const styleValues = computed(() => selectedValues.style || []); // Используем computed для отслеживания изменений
 
-// Выполнение поиска с использованием выбранных значений
 // Выполнение поиска с использованием выбранных значений
 const handleSearch = async () => {
   try {
@@ -90,16 +89,17 @@ const handleSearch = async () => {
       return;
     }
 
-
     // Используем .value для доступа к значению из computed
-    const realismValuesString = realismValues.value.join(',');  // Преобразуем массив в строку
+    const styleValuesString =
+      styleValues.value.join('&style_list=');  // Преобразуем массив в строку
 
-    const response = await axios.get('http://127.0.0.1:8001/styles/users/', {
-      params: {style_names: realismValuesString},  // Отправляем строку
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `/Artists/list/?style_list=${styleValuesString}`, {
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
     console.log('Результаты поиска:', response.data);
   } catch (error) {
