@@ -163,8 +163,11 @@ const userData = ref({
 });
 
 import {useUserStore1} from '@/stores/userStore1'; // Импортируем хранилище Pinia
-
 const userStore1 = useUserStore1(); // Используем хранилище
+
+import {useCheckboxStore} from '@/stores/checkboxStore'; // Импортируем store из Pinia
+const checkboxStore = useCheckboxStore();
+const listId = 'styles';
 
 const passwordError = ref(false);
 
@@ -382,20 +385,23 @@ onMounted(async () => {
     // Получение выбранных стилей пользователя
     const selectedResponse = await axios.get(
       `/Artists/${username}/styles/`, {
-      baseURL: import.meta.env.VITE_API_SERVER,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
     console.log('selectedResponse onMounted', selectedResponse);
 
     if (selectedResponse.data && Array.isArray(selectedResponse.data.styles)) {
       // Обновляем `selected` для каждого стиля
       selectedResponse.data.styles.forEach(selectedStyle => {
-        const styleOption = styleOptions.value.find(option => option.value === selectedStyle);
+        const styleOption = styleOptions.value.find(
+          option => option.value === selectedStyle
+        );
         if (styleOption) {
           styleOption.selected = true;
+          checkboxStore.toggleValue(listId,styleOption.value);
         }
       });
 

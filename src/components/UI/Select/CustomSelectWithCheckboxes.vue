@@ -15,7 +15,7 @@
             :id="`checkbox-${option.value}`"
             v-model="selectedValues"
             :value="option.value"
-            :checked="selectedValues.includes(option.value)"
+            :checked="option.selected"
             @change="updateParent"
           />
           <label class="form-check-label" :for="`checkbox-${option.value}`">
@@ -51,7 +51,7 @@ const emit = defineEmits(['update:selectedValues']);
 const checkboxStore = useCheckboxStore();
 
 // Получаем выбранные значения из Pinia для конкретного списка
-const listId = 'realism'; // Например, для списка "realism"
+const listId = 'styles';
 const selectedValues = ref(checkboxStore.selectedValues[listId] || []);
 
 // Функция для обновления родителя и хранилища
