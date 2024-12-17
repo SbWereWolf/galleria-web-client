@@ -120,42 +120,45 @@ const handleRegistration = async () => {
   }
 
   const userData = {
-    username: email.value,
+    login: email.value,
     password: password.value,
-    last_name: lastName.value,
-    first_name: name.value,
-    middle_name: fio.value,
-    birth_date: formatDate(date.value),
-    phone_number: phone.value,
+    surName: lastName.value,
+    firstName: name.value,
+    patronymic: fio.value,
+    date_of_birth: formatDate(date.value),
+    phone: phone.value,
     email: email.value,
-    gender: isCheckedM.value ? 'male' : (isCheckedW.value ? 'female' : ''),
-    role: selectedRole.value,
-    // adres:"1",
+    sex: isCheckedM.value ? 'm' : (isCheckedW.value ? 'f' : ''),
+    type_role: selectedRole.value,
   };
   console.log(userData)
+
+  let response = {}
   try {
     // Отправляем POST запрос на сервер
-    const response = await fetch('http://127.0.0.1:8001/register/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData)
+    response = await fetch(
+      import.meta.env.VITE_API_SERVER + '/Accounts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
 
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log('Регистрация успешна', data);
-      alert('спасибо за регистрацию теперь вы можете войти по email и паролю')
-      // Можно добавить логику после успешной регистрации, например, переход на страницу входа
-    } else {
-      const error = await response.json();
-      console.error('Ошибка регистрации:', error);
-    }
+      });
   } catch (error) {
     console.log(userData);
     console.error('Ошибка при отправке данных:', error);
+  }
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error('Ошибка регистрации:', error);
+  }
+
+  if (response.ok) {
+    const data = await response.json();
+    console.log('Регистрация успешна', data);
+    alert('Спасибо за регистрацию теперь вы можете войти по email и паролю')
   }
 };
 </script>
