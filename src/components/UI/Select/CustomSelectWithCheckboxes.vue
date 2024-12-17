@@ -1,7 +1,8 @@
 <template>
   <div class="dropdown">
     <!-- Кнопка для открытия dropdown -->
-    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            aria-expanded="false">
       {{ selectedValues.length ? selectedValues.join(', ') : 'Выберите опции' }}
     </button>
 
@@ -33,8 +34,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, watch } from 'vue';
-import { useCheckboxStore } from '@/stores/checkboxStore'; // Импортируем store из Pinia
+import {ref, defineProps, defineEmits, watch, onMounted} from 'vue';
+import {useCheckboxStore} from '@/stores/checkboxStore';
+import axios from "axios"; // Импортируем store из Pinia
 
 // Получаем массив options через пропсы
 defineProps({
@@ -64,25 +66,54 @@ const updateParent = () => {
 watch(selectedValues, (newValue) => {
   checkboxStore.updateSelectedValues(listId, newValue); // Обновляем значение в Pinia, когда оно изменяется
 });
-</script>
 
+
+onMounted(async () => {
+  const token = localStorage.getItem('jwtToken');
+  if (!token) {
+    console.error('Токен отсутствует');
+    return;
+  }
+
+  const userResponse = await fetch(
+    import.meta.env.VITE_API_SERVER + '/Accounts/me/'
+    , {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+  const userData = await userResponse.json();
+
+  const selectedResponse = await axios.get(
+    `/Artists/${userData.username}/styles/`, {
+      baseURL: import.meta.env.VITE_API_SERVER,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  selectedResponse.data.styles.forEach(function (value) {
+    checkboxStore.toggleValue(listId, value);
+  });
+
+});
+</script>
 
 
 <style scoped>
 /* Стили для кнопки */
 .btn-white {
   background-color: #fff; /* Белый фон */
-  color: #000;             /* Черный текст */
-  width: 400px;            /* Ширина 400px */
-  height: 54px;            /* Высота 54px */
-  border: 2px solid #000;  /* Черная рамка */
-  border-radius: 4px;      /* Скругленные углы */
+  color: #000; /* Черный текст */
+  width: 400px; /* Ширина 400px */
+  height: 54px; /* Высота 54px */
+  border: 2px solid #000; /* Черная рамка */
+  border-radius: 4px; /* Скругленные углы */
   display: flex;
   justify-content: space-between;
   align-items: center;
   /* justify-content: center;
   align-items: center; */
-  font-size: 16px;          /* Размер шрифта */
+  font-size: 16px; /* Размер шрифта */
 }
 
 /* Стили для чекбоксов */
@@ -100,7 +131,7 @@ watch(selectedValues, (newValue) => {
 /* Стили для активного состояния чекбокса (когда он выбран) */
 .form-check-input:checked {
   background-color: #fff; /* Белый фон */
-  border-color: #000;     /* Черная рамка */
+  border-color: #000; /* Черная рамка */
 }
 
 /* Стили для галочки, которая будет черной */
@@ -142,7 +173,8 @@ watch(selectedValues, (newValue) => {
   display: inline-block;
   width: 400px;
 }
-ul{
+
+ul {
   width: 400px;
   padding-left: 10px;
 
