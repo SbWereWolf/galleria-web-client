@@ -53,7 +53,7 @@ const emit = defineEmits(['update:selectedValues']);
 const checkboxStore = useCheckboxStore();
 
 // Получаем выбранные значения из Pinia для конкретного списка
-const listId = 'styles';
+const listId = 'style';
 const selectedValues = ref(checkboxStore.selectedValues[listId] || []);
 
 // Функция для обновления родителя и хранилища
