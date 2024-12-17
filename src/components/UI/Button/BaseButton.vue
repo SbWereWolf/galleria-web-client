@@ -4,7 +4,7 @@
     :disabled="disabled"
     @click="onClick"
   >
-    <slot /> <!-- Содержимое кнопки -->
+    <slot/> <!-- Содержимое кнопки -->
   </button>
 </template>
 
@@ -58,6 +58,7 @@ export default {
   color: #fff;
   margin: 60px 0px;
 }
+
 .btn.secondary {
   background-color: #fff;
   color: #291202;
@@ -67,6 +68,7 @@ export default {
   background-color: #FDFBF8;
 
 }
+
 .btn.danger {
   background-color: #dc3545;
   color: #fff;

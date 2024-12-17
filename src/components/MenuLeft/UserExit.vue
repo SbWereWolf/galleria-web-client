@@ -2,15 +2,15 @@
   <div class="frame" :style="{ paddingTop: customMargin }">
     <div class="frame-3" @click="onArrowClick">
       <!-- Текстовый контейнер -->
-       <div>
+      <div>
         <img src="/src/assets/images/exit.png" alt="">
-       </div>
+      </div>
       <div class="text-container">
 
         <span class="artist-contacts">{{ text }}</span>
       </div>
       <!-- Правая стрелка -->
-      <div class="right-arrow" >
+      <div class="right-arrow">
         <div class="vector-4"></div>
       </div>
     </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import {defineProps, defineEmits} from 'vue';
 
 // Пропсы
 defineProps({
@@ -51,6 +51,7 @@ const onArrowClick = () => {
   width: 548px;
   margin: 0px 0 0 40px;
 }
+
 .frame-3 {
   display: flex;
   align-items: center;
@@ -65,9 +66,10 @@ const onArrowClick = () => {
   z-index: 1;
 }
 
-.frame:hover{
+.frame:hover {
   cursor: pointer;
 }
+
 .text-container {
   display: flex;
   align-items: center;
@@ -78,6 +80,7 @@ const onArrowClick = () => {
   width: 440px;
   z-index: 2;
 }
+
 .artist-contacts {
   flex-shrink: 0;
   flex-basis: auto;
@@ -92,6 +95,7 @@ const onArrowClick = () => {
   white-space: nowrap;
   z-index: 3;
 }
+
 .right-arrow {
   flex-shrink: 0;
   position: relative;
@@ -100,6 +104,7 @@ const onArrowClick = () => {
   z-index: 4;
   cursor: pointer;
 }
+
 .vector-4 {
   position: relative;
   width: 10px;

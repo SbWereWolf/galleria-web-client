@@ -1,6 +1,6 @@
 <script setup>
-import { defineProps, defineEmits, ref } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import {defineProps, defineEmits, ref} from 'vue';
+import {onClickOutside} from '@vueuse/core';
 
 // Определение пропса для отображения модального окна
 defineProps({

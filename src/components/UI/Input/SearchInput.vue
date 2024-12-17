@@ -3,7 +3,7 @@
     <label v-if="label" :for="id" class="base-input__label">{{ label }}</label>
     <div class="base-input__wrapper">
       <!-- Иконка поиска заменена на картинку -->
-      <img src="../../../assets/images/search.png" alt="Search" class="base-input__icon" />
+      <img src="../../../assets/images/search.png" alt="Search" class="base-input__icon"/>
 
       <input
         v-bind="$attrs"
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, watch } from 'vue';
+import {ref, defineProps, defineEmits, watch} from 'vue';
 
 // Определяем входные параметры
 const props = defineProps({

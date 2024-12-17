@@ -1,6 +1,6 @@
 <template>
   <p :class="['base-p', size]" :style="customStyles">
-    <slot /> <!-- Содержимое p -->
+    <slot/> <!-- Содержимое p -->
   </p>
 </template>
 
@@ -48,8 +48,8 @@ export default {
   font-weight: 500;
 }
 
-.base-p.medium_green{
-  color:#1C4E37;
+.base-p.medium_green {
+  color: #1C4E37;
   font-weight: 700;
   font-size: 18px;
 }

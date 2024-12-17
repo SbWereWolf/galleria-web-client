@@ -7,12 +7,12 @@
     :style="{ color: computedColor, fontWeight, ...customStyles }"
     @click="handleClick"
   >
-    <slot />
+    <slot/>
   </component>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import {computed} from 'vue';
 
 // Пропсы
 const props = defineProps({

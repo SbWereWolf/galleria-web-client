@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import {defineProps} from 'vue';
 import BaseButton from '../Button/BaseButton.vue';
 
 defineProps({
@@ -8,7 +8,7 @@ defineProps({
   login: String,
   id: String,
   style: String,
-  addres:String,
+  addres: String,
   role: String,
 });
 
@@ -37,12 +37,12 @@ defineProps({
       </div>
       <div class="frame" v-if="role !== 'visitor'">
         <span class="style">Стиль:</span>
-        <span class="abstractionism" >{{ style }}</span>
+        <span class="abstractionism">{{ style }}</span>
 
       </div>
       <div class="frame" v-if="role == 'visitor'">
         <span class="style">Адресс:</span>
-        <span class="abstractionism" >{{ addres }}</span>
+        <span class="abstractionism">{{ addres }}</span>
 
       </div>
     </div>
@@ -64,6 +64,7 @@ defineProps({
   border: 1px solid #cecbc7;
   border-radius: 20px;
 }
+
 .group {
   display: flex;
   flex-direction: column;
@@ -75,6 +76,7 @@ defineProps({
   position: relative;
   width: 226px;
 }
+
 .wrapper {
   align-self: stretch;
   flex-shrink: 0;
@@ -83,19 +85,20 @@ defineProps({
   height: 226px;
   z-index: 1;
 }
+
 .img {
   position: absolute;
   width: 226px;
   height: 226px;
   top: 0;
   left: 50%;
-  background: url(../../../assets/images/ava.png)
-    no-repeat center;
+  background: url(../../../assets/images/ava.png) no-repeat center;
   background-size: cover;
   transform: translate(-50%, 0);
   z-index: 2;
   border-radius: 50%;
 }
+
 .text {
   flex-shrink: 0;
   flex-basis: auto;
@@ -111,6 +114,7 @@ defineProps({
   letter-spacing: -0.48px;
   z-index: 3;
 }
+
 .section {
   display: flex;
   flex-direction: column;
@@ -124,6 +128,7 @@ defineProps({
   min-width: 0;
   z-index: 4;
 }
+
 .wrapper-2 {
   display: flex;
   align-items: center;
@@ -134,6 +139,7 @@ defineProps({
   width: 186px;
   z-index: 5;
 }
+
 .text-2 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -148,6 +154,7 @@ defineProps({
   white-space: nowrap;
   z-index: 6;
 }
+
 .text-3 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -162,6 +169,7 @@ defineProps({
   white-space: nowrap;
   z-index: 7;
 }
+
 .wrapper-3 {
   display: flex;
   align-items: center;
@@ -172,6 +180,7 @@ defineProps({
   width: 135px;
   z-index: 8;
 }
+
 .id {
   flex-shrink: 0;
   flex-basis: auto;
@@ -186,6 +195,7 @@ defineProps({
   white-space: nowrap;
   z-index: 9;
 }
+
 .text-5 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -200,6 +210,7 @@ defineProps({
   white-space: nowrap;
   z-index: 10;
 }
+
 .frame {
   display: flex;
   align-items: center;
@@ -210,6 +221,7 @@ defineProps({
   width: 244px;
   z-index: 11;
 }
+
 .style {
   flex-shrink: 0;
   flex-basis: auto;
@@ -224,6 +236,7 @@ defineProps({
   white-space: nowrap;
   z-index: 12;
 }
+
 .abstractionism {
   flex-shrink: 0;
   flex-basis: auto;

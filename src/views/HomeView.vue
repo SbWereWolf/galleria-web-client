@@ -1,4 +1,3 @@
-
 <!--HomeView-->
 <template>
   <div class="div_main">
@@ -23,12 +22,12 @@
   </div>
 
   <div>
-    <img src="@/assets/Artist-rafiki.png" width="708" height="708" alt="Artist Image" />
+    <img src="@/assets/Artist-rafiki.png" width="708" height="708" alt="Artist Image"/>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import {useRouter} from 'vue-router';
 import BaseButton from '../components/UI/Button/BaseButton.vue';
 import BaseH1 from '../components/UI/H/BaseH1.vue';
 import BaseP from '../components/UI/P/BaseP.vue';

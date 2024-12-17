@@ -4,30 +4,31 @@
       <BaseH1 size="large" :customStyles="{ textAlign: 'center', paddingBottom: '60px' }">Регистрация</BaseH1>
       <form @submit.prevent="handleRegistration">
         <div class="form-input__reg">
-          <BaseInput v-model="fio" label="Фамилия" placeholder="Введите вашу фамилию" id="fio" type="text" />
-          <BaseInput v-model="name" label="Имя" placeholder="Введите ваше имя" id="name" type="text" />
+          <BaseInput v-model="fio" label="Фамилия" placeholder="Введите вашу фамилию" id="fio" type="text"/>
+          <BaseInput v-model="name" label="Имя" placeholder="Введите ваше имя" id="name" type="text"/>
         </div>
 
         <div class="form-input__reg">
-          <BaseInput v-model="lastName" label="Отчество" placeholder="Введите ваше отчество" id="lastName" type="text" />
-          <BaseInput v-model="date" label="Дата рождения" placeholder="Введите дату рождения" id="date" type="date" />
+          <BaseInput v-model="lastName" label="Отчество" placeholder="Введите ваше отчество" id="lastName" type="text"/>
+          <BaseInput v-model="date" label="Дата рождения" placeholder="Введите дату рождения" id="date" type="date"/>
         </div>
 
         <div class="form-input__reg">
-          <BaseInput v-model="phone" label="Номер телефона" placeholder="Введите ваш номер телефона" id="phone" type="tel" />
-          <CustomSelect id="role-select" label="Выберите роль" :options="options" v-model="selectedRole" />
+          <BaseInput v-model="phone" label="Номер телефона" placeholder="Введите ваш номер телефона" id="phone"
+                     type="tel"/>
+          <CustomSelect id="role-select" label="Выберите роль" :options="options" v-model="selectedRole"/>
           <!-- <p>Вы выбрали роль: {{ selectedRole }}</p> -->
         </div>
 
         <div class="form-input__reg">
-          <BaseInput v-model="email" label="Email" placeholder="Введите ваш email" id="email" type="email" />
+          <BaseInput v-model="email" label="Email" placeholder="Введите ваш email" id="email" type="email"/>
           <div class="form-input__reg_sex">
             <div>
               <BaseP size="medium">Пол</BaseP>
             </div>
             <div class="form-input__reg">
-              <CheckboxWithLabel id="accept-terms" label="мужской" v-model="isCheckedM" />
-              <CheckboxWithLabel id="accept-termsW" label="женский" v-model="isCheckedW" />
+              <CheckboxWithLabel id="accept-terms" label="мужской" v-model="isCheckedM"/>
+              <CheckboxWithLabel id="accept-termsW" label="женский" v-model="isCheckedW"/>
             </div>
           </div>
         </div>
@@ -62,7 +63,7 @@
       </form>
 
       <div style="display: flex; align-items: center; column-gap: 5px; justify-content: center;">
-        <BaseP size="medium" :customStyles="{ textAlign: 'right', padding: '10px 0' }">Уже есть аккаунт? </BaseP>
+        <BaseP size="medium" :customStyles="{ textAlign: 'right', padding: '10px 0' }">Уже есть аккаунт?</BaseP>
         <BaseLink to="/login">Войти</BaseLink>
       </div>
     </div>
@@ -70,7 +71,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import BaseInput from '@/components/UI/Input/BaseInput.vue';
 import PasswordInput from '@/components/UI/Input/PasswordInput.vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
@@ -82,8 +83,8 @@ import CustomSelect from '@/components/UI/Select/CustomSelect.vue';
 
 const selectedRole = ref('');
 const options = [
-  { label: 'Художник', value: 'artist' },
-  { label: 'Заказчик', value: 'visitor' },
+  {label: 'Художник', value: 'artist'},
+  {label: 'Заказчик', value: 'visitor'},
 ];
 const isCheckedM = ref(false);
 const isCheckedW = ref(false);
@@ -116,22 +117,22 @@ const handleRegistration = async () => {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
-}
+  }
 
   const userData = {
     username: email.value,
-  password: password.value,
-  last_name: lastName.value,
-  first_name: name.value,
-  middle_name: fio.value,
-  birth_date: formatDate(date.value),
-  phone_number: phone.value,
-  email: email.value,
-  gender: isCheckedM.value ? 'male' : (isCheckedW.value ? 'female' : ''),
-  role: selectedRole.value,
-  // adres:"1",
+    password: password.value,
+    last_name: lastName.value,
+    first_name: name.value,
+    middle_name: fio.value,
+    birth_date: formatDate(date.value),
+    phone_number: phone.value,
+    email: email.value,
+    gender: isCheckedM.value ? 'male' : (isCheckedW.value ? 'female' : ''),
+    role: selectedRole.value,
+    // adres:"1",
   };
- console.log(userData)
+  console.log(userData)
   try {
     // Отправляем POST запрос на сервер
     const response = await fetch('http://127.0.0.1:8001/register/', {

@@ -2,26 +2,26 @@
   <div class="all">
     <div> <!-- Профиль пользователя -->
       <UserProfile :avatarUrl="'../assets/images/ava.png'" :userName="'Александров Александр Александрович'"
-        :role="'Администратор'" :residence="'Санкт-Петербург, Невский проспект, д. 1'"
-        @settings-click="handleSettingsClick" @notifications-click="handleNotificationsClick" />
+                   :role="'Администратор'" :residence="'Санкт-Петербург, Невский проспект, д. 1'"
+                   @settings-click="handleSettingsClick" @notifications-click="handleNotificationsClick"/>
 
       <!-- Меню с кнопками -->
 
-      <UserContacts text="Посмотреть контакты конкретного посетителя" @arrow-click="handleArrowClick('artistContact')" />
-      <UserContacts text="Посмотреть художников" @arrow-click="handleArrowClick('artists')" />
-      <UserContacts text="Посмотреть предзаказы" @arrow-click="handleArrowClick('orders')" />
-      <UserContacts text="Посмотреть конкретный предзаказ" @arrow-click="handleArrowClick('specificOrder')" />
-      <UserContacts text="Изменить статус предзаказа" @arrow-click="handleArrowClick('createOrder')" />
+      <UserContacts text="Посмотреть контакты конкретного посетителя" @arrow-click="handleArrowClick('artistContact')"/>
+      <UserContacts text="Посмотреть художников" @arrow-click="handleArrowClick('artists')"/>
+      <UserContacts text="Посмотреть предзаказы" @arrow-click="handleArrowClick('orders')"/>
+      <UserContacts text="Посмотреть конкретный предзаказ" @arrow-click="handleArrowClick('specificOrder')"/>
+      <UserContacts text="Изменить статус предзаказа" @arrow-click="handleArrowClick('createOrder')"/>
 
 
-      <UserExit text="выйти" :customMargin="'120px'" @arrow-click="handleArrowClick('revokeOrder')" />
+      <UserExit text="выйти" :customMargin="'120px'" @arrow-click="handleArrowClick('revokeOrder')"/>
     </div>
 
 
     <!-- Динамически подгружаемый контент -->
     <div class="content">
-      <component v-if="activeSectionComponent" :is="activeSectionComponent" />
-      <img v-else src="../assets/images/home.png" alt="Home" class="default-image" />
+      <component v-if="activeSectionComponent" :is="activeSectionComponent"/>
+      <img v-else src="../assets/images/home.png" alt="Home" class="default-image"/>
     </div>
     <!-- Динамически подгружаемый контент -->
     <!-- <div class="content">
@@ -42,7 +42,7 @@
 
 
 <script setup>
-import { ref , computed, defineAsyncComponent } from 'vue';
+import {ref, computed, defineAsyncComponent} from 'vue';
 import UserContacts from '@/components/MenuLeft/UserContacts.vue';
 import UserProfile from '@/components/MenuLeft/UserProfile.vue';
 import UserExit from '@/components/MenuLeft/UserExit.vue';

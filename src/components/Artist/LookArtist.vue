@@ -22,11 +22,11 @@
   </div>
 
   <BaseCard :avatar="user.avatar_url" :name="user.username" :login="user.username" :id="user.id" :style="user.style"
-  :addres="user.adres" :role="user.role" />
+            :addres="user.adres" :role="user.role"/>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import {ref, onMounted, computed} from 'vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
@@ -34,7 +34,7 @@ import BaseCard from '@/components/UI/Card/BaseCard.vue';
 import CustomSelectWithCheckboxes from '@/components/UI/Select/CustomSelectWithCheckboxes.vue';
 import axios from 'axios';
 
-import { useCheckboxStore } from '@/stores/checkboxStore'; // Импортируем store из Pinia
+import {useCheckboxStore} from '@/stores/checkboxStore'; // Импортируем store из Pinia
 
 const checkboxStore = useCheckboxStore();  // Получаем доступ к хранилищу Pinia
 const selectedValues = checkboxStore.selectedValues;  // Доступ к выбранным значениям из Pinia
@@ -89,12 +89,11 @@ const handleSearch = async () => {
     }
 
 
-
     // Используем .value для доступа к значению из computed
     const realismValuesString = realismValues.value.join(',');  // Преобразуем массив в строку
 
     const response = await axios.get('http://127.0.0.1:8001/styles/users/', {
-      params: { style_names: realismValuesString },  // Отправляем строку
+      params: {style_names: realismValuesString},  // Отправляем строку
       headers: {
         Authorization: `Bearer ${token}`,
       },

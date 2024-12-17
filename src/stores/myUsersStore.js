@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 
 export const useMyUserStore = defineStore('userStore', {
   state: () => ({
     token: localStorage.getItem('jwtToken') || null,
     role: null, // Храним роль здесь
     user: null, // Данные пользователя
-    id:null,
+    id: null,
   }),
   actions: {
     setRole(role) {

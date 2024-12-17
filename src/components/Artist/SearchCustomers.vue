@@ -1,12 +1,12 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import {ref, onMounted} from 'vue';
 import SearchInput from '@/components/UI/Input/SearchInput.vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
 import BaseCard from '@/components/UI/Card/BaseCard.vue'; // Подключение BaseCard
 
-import { useAuthStore } from '@/stores/auth';
+import {useAuthStore} from '@/stores/auth';
 
 const authStore = useAuthStore();
 
@@ -42,7 +42,7 @@ const findUser = async () => {
     console.log('result', result);
     role.value = result.role || 'guest'; // Устанавливаем значение роли
 
-      if (role.value === 'artist') {
+    if (role.value === 'artist') {
       await loadArtistStyles(result.username);
       console.log('result loadArtistStyles', result.username)
     }
@@ -65,7 +65,6 @@ const findUser = async () => {
       console.log('user adres:', user.value.adres);
 
       userNotFound.value = false;
-
 
 
     } else {
@@ -132,7 +131,7 @@ onMounted(async () => {
   </BaseH1>
   <div class="centerCart">
     <BaseP size="large">Найти по логину</BaseP>
-    <SearchInput v-model="searchQuery" />
+    <SearchInput v-model="searchQuery"/>
     <BaseButton size="large" variant="primary60" @click="findUser" :disabled="isButtonDisabled">
       Найти
     </BaseButton>
@@ -141,7 +140,7 @@ onMounted(async () => {
 
   <div v-if="user">
     <BaseCard :avatar="user.avatar_url" :name="user.username" :login="user.username" :id="user.id" :style="user.style"
-      :addres="user.adres" :role="user.role" />
+              :addres="user.adres" :role="user.role"/>
   </div>
 
   <div v-else-if="userNotFound" class="error-message">

@@ -1,13 +1,13 @@
 <template>
   <BaseH1 size="large" :customStyles="{ paddingBottom: '60px', textAlign:'center' }">Выберите художника</BaseH1>
   <div class="centerCart">
-      <BaseP size="large">Найти по логину</BaseP>
-  <SearchInput />
-  <BaseButton size="large" variant="primary60">Найти</BaseButton>
+    <BaseP size="large">Найти по логину</BaseP>
+    <SearchInput/>
+    <BaseButton size="large" variant="primary60">Найти</BaseButton>
   </div>
 
 
-    <BaseCard />
+  <BaseCard/>
 
 </template>
 <script setup>

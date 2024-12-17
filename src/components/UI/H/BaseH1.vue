@@ -1,6 +1,6 @@
 <template>
   <h1 :class="['base-h1', size]" :style="customStyles">
-    <slot /> <!-- Содержимое h1 -->
+    <slot/> <!-- Содержимое h1 -->
   </h1>
 </template>
 

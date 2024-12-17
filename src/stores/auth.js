@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 import jwt_decode from 'jwt-decode';
 
 export const useAuthStore = defineStore('auth', {
@@ -45,7 +45,8 @@ export const useAuthStore = defineStore('auth', {
       try {
         const decoded = jwt_decode(token); // Декодируем токен
         this.role = decoded.role || null; // Сохраняем роль из токена
-        this.userId = decoded.user_id || null;; // Сохраняем user_id из токена
+        this.userId = decoded.user_id || null;
+         // Сохраняем user_id из токена
         const response = await fetch('http://127.0.0.1:8001/users/me/', {
           headers: {
             Authorization: `Bearer ${token}`,

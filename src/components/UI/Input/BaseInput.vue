@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, watch } from 'vue';
+import {ref, defineProps, defineEmits, watch} from 'vue';
 
 // Определяем входные параметры
 const props = defineProps({
@@ -74,8 +74,9 @@ watch(() => props.value, (newValue) => {
   outline: none;
   border-color: #007bff;
 }
-label{
-  color:#291202;
+
+label {
+  color: #291202;
   font-weight: 700;
 }
 </style>

@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import {defineProps} from 'vue';
 
 defineProps({
   id: {
@@ -64,6 +64,7 @@ defineProps({
   background-size: contain;
   background-repeat: no-repeat;
 }
+
 .label {
   font-size: 16px;
   cursor: pointer;

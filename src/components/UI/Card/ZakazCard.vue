@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import {defineProps} from 'vue';
 
 // Пропсы для получения данных о произведении искусства
 defineProps({
@@ -33,8 +33,6 @@ defineProps({
   },
 });
 </script>
-
-
 
 
 <style scoped>
@@ -53,6 +51,7 @@ defineProps({
   text-align: left;
   white-space: nowrap;
 }
+
 .frame-1 {
   display: flex;
   flex-direction: column;
@@ -65,6 +64,7 @@ defineProps({
   min-width: 0;
   z-index: 1;
 }
+
 .frame-2 {
   display: flex;
   align-items: center;
@@ -75,6 +75,7 @@ defineProps({
   position: relative;
   z-index: 2;
 }
+
 .description {
   flex-shrink: 0;
   flex-basis: auto;
@@ -89,6 +90,7 @@ defineProps({
   white-space: nowrap;
   z-index: 3;
 }
+
 .winter-landscape {
   flex-shrink: 0;
   flex-basis: auto;
@@ -103,6 +105,7 @@ defineProps({
   white-space: nowrap;
   z-index: 4;
 }
+
 .frame-3 {
   display: flex;
   align-items: center;
@@ -113,6 +116,7 @@ defineProps({
   width: 132px;
   z-index: 5;
 }
+
 .style {
   flex-shrink: 0;
   flex-basis: auto;
@@ -127,6 +131,7 @@ defineProps({
   white-space: nowrap;
   z-index: 6;
 }
+
 .realism {
   flex-shrink: 0;
   flex-basis: auto;
@@ -141,6 +146,7 @@ defineProps({
   white-space: nowrap;
   z-index: 7;
 }
+
 .frame-4 {
   display: flex;
   align-items: center;
@@ -151,6 +157,7 @@ defineProps({
   width: 82px;
   z-index: 8;
 }
+
 .text-6 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -165,6 +172,7 @@ defineProps({
   white-space: nowrap;
   z-index: 9;
 }
+
 .text-7 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -179,6 +187,7 @@ defineProps({
   white-space: nowrap;
   z-index: 10;
 }
+
 .section-2 {
   display: flex;
   align-items: center;
@@ -189,6 +198,7 @@ defineProps({
   width: 122px;
   z-index: 11;
 }
+
 .text-8 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -203,6 +213,7 @@ defineProps({
   white-space: nowrap;
   z-index: 12;
 }
+
 .text-9 {
   flex-shrink: 0;
   flex-basis: auto;
@@ -217,6 +228,7 @@ defineProps({
   white-space: nowrap;
   z-index: 13;
 }
+
 .frame-5 {
   display: flex;
   align-items: center;
@@ -227,6 +239,7 @@ defineProps({
   width: 192px;
   z-index: 14;
 }
+
 .customer {
   flex-shrink: 0;
   position: relative;
@@ -243,6 +256,7 @@ defineProps({
   border: none;
   z-index: 15;
 }
+
 .ivanov {
   flex-shrink: 0;
   position: relative;

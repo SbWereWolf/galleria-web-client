@@ -4,31 +4,31 @@
   <div class="centerCart">
     <!-- Селект для стилей -->
     <BaseP size="large">Стиль</BaseP>
-    <CustomSelectWithCheckboxes :options="styleOptions" listId="style" v-model="selectedValues.style" />
+    <CustomSelectWithCheckboxes :options="styleOptions" listId="style" v-model="selectedValues.style"/>
     <p>Выбранные стили: {{ selectedStyleLabels }}</p>
 
     <!-- Селект для статусов -->
     <BaseP size="large">Статус</BaseP>
-    <CustomSelectWithCheckboxes :options="statusOptions" listId="status" v-model="selectedValues.status" />
+    <CustomSelectWithCheckboxes :options="statusOptions" listId="status" v-model="selectedValues.status"/>
     <p>Выбранные статусы: {{ selectedStatusLabels }}</p>
 
     <BaseButton size="large" variant="primary60">Найти</BaseButton>
   </div>
 
   <div class="card_zakaz">
-    <ZakazCard :artwork="artworkData" />
+    <ZakazCard :artwork="artworkData"/>
     <BaseButton size="small">Отозвать предзаказ</BaseButton>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
 import ZakazCard from '@/components/UI/Card/ZakazCard.vue';
 import CustomSelectWithCheckboxes from '@/components/UI/Select/CustomSelectWithCheckboxes.vue';
-import { useCheckboxStore } from '../stores/checkboxStore';
+import {useCheckboxStore} from '../stores/checkboxStore';
 
 // Доступ к состоянию чекбоксов
 const checkboxStore = useCheckboxStore();
@@ -38,17 +38,17 @@ const selectedValues = computed(() => checkboxStore.selectedValues);
 
 // Опции для стилей
 const styleOptions = [
-  { value: "modern", label: "Современный" },
-  { value: "classic", label: "Классический" },
-  { value: "abstract", label: "Абстрактный" },
-  { value: "dadizm", label: "Дадизм" },
+  {value: "modern", label: "Современный"},
+  {value: "classic", label: "Классический"},
+  {value: "abstract", label: "Абстрактный"},
+  {value: "dadizm", label: "Дадизм"},
 ];
 
 // Опции для статусов
 const statusOptions = [
-  { value: "new", label: "Новый" },
-  { value: "popular", label: "Популярный" },
-  { value: "featured", label: "Рекомендуемый" },
+  {value: "new", label: "Новый"},
+  {value: "popular", label: "Популярный"},
+  {value: "featured", label: "Рекомендуемый"},
 ];
 
 // Реактивные метки для выбранных значений

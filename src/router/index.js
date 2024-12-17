@@ -1,14 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
+import {createRouter, createWebHistory} from 'vue-router';
+import {useAuthStore} from '../stores/auth';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import CustomerCabinet from '@/views/CustomerCabinet.vue';
 import ArtistCabinetView from '@/views/ArtistCabinetView.vue';
+
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/cabinet', component: CustomerCabinet },
-  { path: '/artist', component: ArtistCabinetView },
+  {path: '/', component: HomeView},
+  {path: '/cabinet', component: CustomerCabinet},
+  {path: '/artist', component: ArtistCabinetView},
   {
     path: '/login',
     name: 'Login',

@@ -2,7 +2,7 @@
   <div class="custom-select">
     <label>{{ label }}</label>
     <div class="select" @click="toggleOpen">
-      <div class="select-title"    :class="{ open: isOpen }">{{ selectedValue || 'Choose an option' }}
+      <div class="select-title" :class="{ open: isOpen }">{{ selectedValue || 'Choose an option' }}
 
       </div>
       <div v-if="isOpen" class="select-options">
@@ -13,7 +13,7 @@
           class="select-option"
         >
           {{ option.label }}
-          <hr v-if="index !== options.length - 1" class="option-divider" />
+          <hr v-if="index !== options.length - 1" class="option-divider"/>
         </div>
       </div>
     </div>
@@ -21,9 +21,9 @@
 </template>
 
 <script setup>
-import { ref , defineProps} from 'vue';
+import {ref, defineProps} from 'vue';
 
-const props =defineProps({
+const props = defineProps({
   label: String,
   options: Array,
   modelValue: String,
@@ -42,14 +42,14 @@ const selectedValue = ref(props.modelValue);
 const selectOption = (option) => {
   selectedValue.value = option.label; // Установка выбранного значения
   isOpen.value = true; // Закрытие меню после выбора
-  emit('update:modelValue', option.value); 
+  emit('update:modelValue', option.value);
 };
 </script>
 
 <style scoped>
 .custom-select {
   width: 400px;
-  font-family:  Roboto, sans-serif, sans-serif;
+  font-family: Roboto, sans-serif, sans-serif;
   position: relative;
   height: 540x;
   top: -6px;
@@ -57,10 +57,10 @@ const selectOption = (option) => {
 
 .select {
   cursor: pointer;
-    position: relative;
-    padding: 13px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  position: relative;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   /* height: 54px; */
 }
 
@@ -95,20 +95,22 @@ const selectOption = (option) => {
 .select-option:hover {
   background-color: #f0f0f0;
 }
-hr{
+
+hr {
   position: relative;
   top: 10px;
 
 }
 
-label{
+label {
   font-size: 14px;
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 
 
-    color: #291202;
-    font-weight: 700;
+  color: #291202;
+  font-weight: 700;
 }
+
 .select-title::after {
   content: '▼'; /* Стрелочка вниз */
   font-size: 12px;
