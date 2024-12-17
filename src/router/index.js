@@ -8,7 +8,7 @@ import ArtistCabinetView from '@/views/ArtistCabinetView.vue';
 const routes = [
   { path: '/', component: HomeView },
   { path: '/cabinet', component: CustomerCabinet },
-  { path: '/art', component: ArtistCabinetView },
+  { path: '/artist', component: ArtistCabinetView },
   {
     path: '/login',
     name: 'Login',
@@ -38,14 +38,14 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login' || to.path === '/register') {
       // Если он уже авторизован и пытается перейти на /login или /register, редиректим его
       if (authStore.user.role === 'artist') {
-        next('/art'); // Кабинет художника
+        next('/artist'); // Кабинет художника
       } else {
         next('/cabinet'); // Кабинет клиента
       }
     } else {
       // Если роль художник, перенаправляем на /art, если обычный пользователь, то на /cabinet
-      if (authStore.user.role === 'artist' && to.path !== '/art') {
-        next('/art');
+      if (authStore.user.role === 'artist' && to.path !== '/artist') {
+        next('/artist');
       } else if (authStore.user.role !== 'artist' && to.path !== '/cabinet') {
         next('/cabinet');
       } else {
@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     // Если пользователь не авторизован и пытается перейти на защищенную страницу
-    if (to.path === '/cabinet' || to.path === '/art') {
+    if (to.path === '/cabinet' || to.path === '/artist') {
       next('/login'); // Перенаправляем на страницу логина
     } else {
       next(); // Разрешаем переход на другие страницы

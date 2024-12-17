@@ -4,7 +4,7 @@
     <div class="user-container">
       <div class="user-photo">
         <!-- <div class="ellipse" :style="{ backgroundImage: `url(${avatarUrl})` }"></div> -->
-        <img class="ellipse" :src="avatarUrl" alt="Фото пользователя" />
+        <img class="ellipse" :src="avatarUrl" alt="Фото пользователя"/>
 
       </div>
       <div class="description">
@@ -42,8 +42,6 @@
   </div>
 
 
-
-
   <!-- Модальное окно из Bootstrap -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -57,7 +55,7 @@
             <div>
 
               <div>
-                <img :src="avatarUrl" alt="Фото пользователя" width="212" height="212" style="border-radius: 50%;" />
+                <img :src="avatarUrl" alt="Фото пользователя" width="212" height="212" style="border-radius: 50%;"/>
                 <!-- <img src="../../assets/images/ava.png"  alt=""> -->
               </div>
               <div class="modal_block1__link">
@@ -70,9 +68,9 @@
               <BaseH1>Изменить пароль</BaseH1>
 
               <BaseP>Новый пароль</BaseP>
-              <PasswordInput v-model="userData.password" @input="checkPasswords" />
+              <PasswordInput v-model="userData.password" @input="checkPasswords"/>
               <BaseP>Подтвердить пароль</BaseP>
-              <PasswordInput v-model="userData.confirmPassword" @input="checkPasswords" />
+              <PasswordInput v-model="userData.confirmPassword" @input="checkPasswords"/>
               <div v-if="passwordsDontMatch" class="error-message">
                 Пароли не совпадают.
               </div>
@@ -84,7 +82,7 @@
 
             <div>
               <BaseP>Фамилия</BaseP>
-              <BaseInput v-model="userData.last_name" :value="userData.last_name" />
+              <BaseInput v-model="userData.last_name" :value="userData.last_name"/>
               <BaseP>Имя</BaseP>
               <BaseInput v-model="userData.first_name" :value="userData.first_name"></BaseInput>
 
@@ -101,17 +99,12 @@
               <div v-if="role === 'artist'">
                 <BaseP>Стили:</BaseP>
                 <!-- Передаем доступные стили и выбранные значения в компонент -->
-                <CustomSelectWithCheckboxes :options="styleOptions" v-model="selectedValues.style" />
-                <!-- <p>Выбранные значения: {{ selectedValues.style }}</p> -->
-                <!-- <span v-for="(style, index) in styles" :key="index" class="address">
-                  {{ style.join(', ') }}
-                </span> -->
+                <CustomSelectWithCheckboxes :options="styleOptions" v-model="selectedValues.style"/>
               </div>
               <div v-if="role === 'visitor'">
                 <BaseP>Резиденция</BaseP>
                 <BaseInput v-model:value="userData.residence"></BaseInput>
               </div>
-
 
 
               <BaseP>Логин</BaseP>
@@ -137,24 +130,23 @@
 
 <script setup>
 
-import { defineEmits, ref, watch } from 'vue';
+import {defineEmits, ref, watch} from 'vue';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // Импортируем стили
-import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import {Modal} from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import PasswordInput from '../UI/Input/PasswordInput.vue';
 import BaseInput from '../UI/Input/BaseInput.vue';
 import BaseP from '../UI/P/BaseP.vue';
 import BaseLink from '../UI/Linlk/BaseLink.vue';
 
-import { onMounted } from 'vue';
+import {onMounted} from 'vue';
 import BaseButton from '../UI/Button/BaseButton.vue';
 import BaseH1 from '../UI/H/BaseH1.vue';
 import axios from 'axios';
-import { useAuthStore } from '@/stores/auth';
+import {useAuthStore} from '@/stores/auth';
 import CustomSelectWithCheckboxes from '@/components/UI/Select/CustomSelectWithCheckboxes.vue';
-// import { useUserStore1 } from '@/stores/userStore1';
-// const userStore1 = useUserStore1();
+
 const authStore = useAuthStore();
 const emit = defineEmits(['settings-click', 'notifications-click']);
 
@@ -170,7 +162,7 @@ const userData = ref({
   confirmPassword: ''
 });
 
-import { useUserStore1 } from '@/stores/userStore1'; // Импортируем хранилище Pinia
+import {useUserStore1} from '@/stores/userStore1'; // Импортируем хранилище Pinia
 
 const userStore1 = useUserStore1(); // Используем хранилище
 
@@ -248,7 +240,6 @@ const saveSettings = async () => {
 };
 
 
-
 onMounted(() => {
   // Инициализация модального окна при монтировании компонента
   const modalElement = document.getElementById('exampleModal');
@@ -260,11 +251,8 @@ onMounted(() => {
 const userName = ref('Иванов Иван Иванович');
 const role = ref('Пользователь');
 const residence = ref('Москва, ул. Ленина, д. 22, кв. 55');
-const avatarUrl = ref('../../assets/images/ava.png'); // URL изображения по умолчанию
+const avatarUrl = ref('/src/assets/images/ava.png'); // URL изображения по умолчанию
 const styles = ref([]); // Массив для хранения стилей артиста
-
-
-
 
 
 // Загрузка данных пользователя
@@ -276,15 +264,14 @@ const loadUserData = async () => {
       return;
     }
 
-    const response = await axios.get('/users/me/detail', {
-      baseURL: 'http://127.0.0.1:8001',
+    const response = await axios.get('/Accounts/me/about/', {
+      baseURL: import.meta.env.VITE_API_SERVER,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
     const user = response.data;
-
 
 
     // Сохраняем id пользователя в Pinia
@@ -310,7 +297,7 @@ const loadUserData = async () => {
       : 'Имя не указано';
     role.value = user.role || 'Роль не указана';
     residence.value = user.adres || 'Резиденция не указана';
-    avatarUrl.value = user.avatar_url || '../../assets/images/ava.png';
+    avatarUrl.value = user.avatar_url || '/src/assets/images/ava.png';
 
     // Если пользователь — артист, загружаем стили
     if (role.value === 'artist') {
@@ -330,8 +317,8 @@ const loadArtistStyles = async (username) => {
       return;
     }
 
-    const response = await axios.get(`/users/${username}/styles/`, {
-      baseURL: 'http://127.0.0.1:8001',
+    const response = await axios.get(`/Artists/${username}/styles/`, {
+      baseURL: import.meta.env.VITE_API_SERVER,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -357,7 +344,6 @@ const selectedValues = ref({
 });
 
 
-
 // onMounted для загрузки данных
 onMounted(async () => {
   const username = authStore.user.username;
@@ -375,7 +361,8 @@ onMounted(async () => {
     }
 
     // Получение доступных стилей
-    const stylesResponse = await axios.get('http://127.0.0.1:8001/styles/', {
+    const stylesResponse = await axios.get('/Artists/styles/', {
+      baseURL: import.meta.env.VITE_API_SERVER,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -393,8 +380,9 @@ onMounted(async () => {
     }
 
     // Получение выбранных стилей пользователя
-    const selectedResponse = await axios.get(`/users/${username}/styles/`, {
-      baseURL: 'http://127.0.0.1:8001',
+    const selectedResponse = await axios.get(
+      `/Artists/${username}/styles/`, {
+      baseURL: import.meta.env.VITE_API_SERVER,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -420,8 +408,6 @@ onMounted(async () => {
     console.error('Ошибка при загрузке данных:', error);
   }
 });
-
-
 
 
 </script>
