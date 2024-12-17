@@ -165,10 +165,6 @@ const userData = ref({
 import {useUserStore1} from '@/stores/userStore1'; // Импортируем хранилище Pinia
 const userStore1 = useUserStore1(); // Используем хранилище
 
-import {useCheckboxStore} from '@/stores/checkboxStore'; // Импортируем store из Pinia
-const checkboxStore = useCheckboxStore();
-const listId = 'styles';
-
 const passwordError = ref(false);
 
 const onNotificationsClick = () => {
@@ -401,7 +397,6 @@ onMounted(async () => {
         );
         if (styleOption) {
           styleOption.selected = true;
-          checkboxStore.toggleValue(listId,styleOption.value);
         }
       });
 
