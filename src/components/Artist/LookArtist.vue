@@ -56,7 +56,8 @@ const loadStyleOptions = async () => {
       return;
     }
 
-    const stylesResponse = await axios.get('http://127.0.0.1:8001/styles/', {
+    const stylesResponse = await axios.get('/Artists/styles/', {
+      baseURL: import.meta.env.VITE_API_SERVER,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -66,6 +67,7 @@ const loadStyleOptions = async () => {
       styleOptions.value = stylesResponse.data.styles.map(style => ({
         value: style,
         label: style,
+        selected: false,
       }));
     } else {
       console.error('Ошибка при загрузке стилей');
