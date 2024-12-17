@@ -7,6 +7,7 @@ import BaseButton from '@/components/UI/Button/BaseButton.vue';
 import BaseCard from '@/components/UI/Card/BaseCard.vue'; // Подключение BaseCard
 
 import {useAuthStore} from '@/stores/auth';
+import axios from "axios";
 
 const authStore = useAuthStore();
 
@@ -26,13 +27,19 @@ const findUser = async () => {
     alert('Вы не авторизованы!');
     return;
   }
+  const token = localStorage.getItem('jwtToken');
+  if (!token) {
+    console.error('Токен отсутствует');
+    return;
+  }
 
   try {
-    const response = await fetch(`http://127.0.0.1:8001/users/${searchQuery.value}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
-      },
-    });
+    const response = await fetch(
+      import.meta.env.VITE_API_SERVER + `/users/${searchQuery.value}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
     if (!response.ok) {
       throw new Error('Ошибка при получении данных');
@@ -90,13 +97,13 @@ const loadArtistStyles = async (username) => {
       return;
     }
 
-    const response = await fetch(`http://127.0.0.1:8001/users/${username}/styles/`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios.get(
+      `/Artists/${username}/styles/`, {
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
     if (!response.ok) {
       throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
