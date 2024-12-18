@@ -217,11 +217,16 @@ const saveSettings = async () => {
       username: userData.value.username,
       email: userData.value.email,
       password: userData.value.password, // только если изменен пароль
-      role: role.value === userStore1.role,// Отправляем только если роль артист
     };
 
+    const last=userData.value.last_name;
+    const first=userData.value.first_name;
+
     // Отправка PUT запроса
-    await axios.put(`http://127.0.0.1:8001/update/${userStore1.userId}`, updatedUserData, {
+    await axios.put(`/Accounts?new_first_name=${first}&new_last_name=${last}`
+      , updatedUserData
+      , {
+      baseURL: import.meta.env.VITE_API_SERVER,
       headers: {
         Authorization: `Bearer ${token}`
       }
