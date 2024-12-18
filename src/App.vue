@@ -1,5 +1,6 @@
 <template>
-  <router-view></router-view>  <!-- Это место для отображения текущего маршрута -->
+  <!-- Это место для отображения текущего маршрута -->
+  <router-view></router-view>
 </template>
 
 <script>
