@@ -219,18 +219,30 @@ const saveSettings = async () => {
       password: userData.value.password, // только если изменен пароль
     };
 
-    const last=userData.value.last_name;
-    const first=userData.value.first_name;
-
-    // Отправка PUT запроса
+    const last = userData.value.last_name;
+    const first = userData.value.first_name;
     await axios.put(`/Accounts?new_first_name=${first}&new_last_name=${last}`
       , updatedUserData
       , {
-      baseURL: import.meta.env.VITE_API_SERVER,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+    if (role.value === 'visitor') {
+
+      const residence = userData.value.residence;
+      await axios.put(`/Visitors?new_residence=${residence}`
+        , updatedUserData
+        , {
+          baseURL: import.meta.env.VITE_API_SERVER,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+    }
 
     // Закрыть модальное окно
     const modalElement = document.getElementById('exampleModal');
