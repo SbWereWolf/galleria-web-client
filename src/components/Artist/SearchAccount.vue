@@ -106,11 +106,11 @@ const loadArtistStyles = async (username) => {
         },
       });
 
-    if (!response.ok) {
+    if (response.status>=300) {
       throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json();
+    const data = response.data;
     window.console.log('styles загружены:', data);
     if (Array.isArray(data.styles)) {
       styles.value = [...data.styles];
@@ -134,8 +134,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <BaseH1 size="large"
-          :customStyles="{ paddingBottom: '60px', textAlign: 'center' }">
+  <BaseH1
+    size="large"
+    :customStyles="{ paddingBottom: '60px', textAlign: 'center' }">
     Найдите посетителя
   </BaseH1>
   <div class="centerCart">
