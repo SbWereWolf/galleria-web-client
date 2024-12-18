@@ -15,7 +15,8 @@
     <VoucherCard :artwork="data.artwork"/>
   </div>
   <div>
-    <BaseButton size="small" @click="revoke">Отозвать предзаказ</BaseButton>
+    <BaseButton size="small" @click="toWork">В работу</BaseButton>
+    <BaseButton size="small" @click="complete">Сделано</BaseButton>
   </div>
 </template>
 <script setup>
@@ -55,7 +56,7 @@ const obtain = async () => {
   }
 };
 
-const revoke = async () => {
+const toWork = async () => {
   try {
     const token = window.localStorage.getItem('jwtToken');
     if (!token) {
@@ -63,19 +64,49 @@ const revoke = async () => {
       return;
     }
 
-    const response = await axios.delete(
-      `/Vouchers?voucher_id=${data.id}`, {
+    const new_status = 'in work';
+    const response = await axios.put(
+        `/Vouchers?voucher_id=${data.id}&new_status=${new_status}`,
+      {},
+      {
         baseURL: import.meta.env.VITE_API_SERVER,
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
 
-    window.console.log('Результаты удаления:', response.data);
+    window.console.log('Результаты перевода на новый статус:', response.data);
     data.artwork = {};
-    window.alert('Ваучер отозван.')
+    window.alert('Ваучер взят в работу.')
   } catch (error) {
-    window.console.error('Ошибка удаления:', error);
+    window.console.error('Ошибка изменения статуса:', error);
+  }
+};
+
+const complete = async () => {
+  try {
+    const token = window.localStorage.getItem('jwtToken');
+    if (!token) {
+      window.console.error('Токен отсутствует');
+      return;
+    }
+
+    const new_status = 'ready';
+    const response = await axios.put(
+      `/Vouchers?voucher_id=${data.id}&new_status=${new_status}`,
+      {},
+      {
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+    window.console.log('Результаты перевода на новый статус:', response.data);
+    data.artwork = {};
+    window.alert('Работа по ваучеру завершена.')
+  } catch (error) {
+    window.console.error('Ошибка изменения статуса:', error);
   }
 };
 </script>
