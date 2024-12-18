@@ -1,7 +1,11 @@
 <template>
-  <BaseH1 size="large" :customStyles="{ paddingBottom: '60px', textAlign:'center' }">Посмотреть предзаказ</BaseH1>
+  <BaseH1 size="large"
+          :customStyles="{ paddingBottom: '60px', textAlign:'center' }"
+  >
+    Просмотреть ваучер
+  </BaseH1>
   <div class="centerCart">
-    <BaseP size="large">id предзаказа</BaseP>
+    <BaseP size="large">id ваучера</BaseP>
     <SearchInput/>
     <BaseButton size="large" variant="primary60">Найти</BaseButton>
   </div>

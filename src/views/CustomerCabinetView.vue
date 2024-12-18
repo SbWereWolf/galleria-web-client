@@ -8,9 +8,10 @@
       <!-- Меню с кнопками -->
 
       <UserContacts text="Поиск пользователей" @arrow-click="handleArrowClick('SearchAccount')"/>
+      <UserContacts text="Подобрать художника" @arrow-click="handleArrowClick('PickupArtist')"/>
+      <UserContacts text="Создать ваучер" @arrow-click="handleArrowClick('CreateVoucher')"/>
       <UserContacts text="Искать ваучер" @arrow-click="handleArrowClick('SearchVoucher')"/>
       <UserContacts text="Просмотреть ваучер" @arrow-click="handleArrowClick('ShowVoucher')"/>
-
 
       <UserExit text="выйти" :customMargin="'120px'"/>
     </div>
@@ -53,6 +54,10 @@ const handleArrowClick = (section) => {
 const activeSectionComponent = computed(() => {
   if (activeSection.value === 'SearchAccount') {
     return defineAsyncComponent(() => import('@/components/Artist/SearchAccount.vue'));
+  } else if (activeSection.value === 'PickupArtist') {
+    return defineAsyncComponent(() => import('@/views/PickupArtistView.vue'));
+  } else if (activeSection.value === 'CreateVoucher') {
+    return defineAsyncComponent(() => import('@/views/CreateVoucherView.vue'));
   } else if (activeSection.value === 'SearchVoucher') {
     return defineAsyncComponent(() => import('@/views/SearchVoucherView.vue'));
   } else if (activeSection.value === 'ShowVoucher') {
@@ -69,4 +74,9 @@ const activeSectionComponent = computed(() => {
   gap: 20px;
 }
 
+/* .content {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
 </style>

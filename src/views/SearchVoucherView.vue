@@ -1,5 +1,9 @@
 <template>
-  <BaseH1 size="large" :customStyles="{ paddingBottom: '60px', textAlign:'center' }">Предзаказы</BaseH1>
+  <BaseH1 size="large"
+          :customStyles="{ paddingBottom: '60px', textAlign:'center' }"
+  >
+    Искать ваучер
+  </BaseH1>
 
   <div class="centerCart">
     <!-- Селект для стилей -->
@@ -14,25 +18,18 @@
 
     <BaseButton size="large" variant="primary60">Найти</BaseButton>
   </div>
-
-  <div class="card_zakaz">
-    <ZakazCard :artwork="artworkData"/>
-    <BaseButton size="small">Отозвать предзаказ</BaseButton>
-  </div>
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from 'vue';
+import {computed, onMounted, } from 'vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
-import ZakazCard from '@/components/UI/Card/ZakazCard.vue';
 import CustomSelectWithCheckboxes from '@/components/UI/Select/CustomSelectWithCheckboxes.vue';
 import {useCheckboxStore} from '../stores/checkboxStore';
 
 // Доступ к состоянию чекбоксов
 const checkboxStore = useCheckboxStore();
-const artworkData = ref({});
 // Реактивное хранилище выбранных значений
 const selectedValues = computed(() => checkboxStore.selectedValues);
 

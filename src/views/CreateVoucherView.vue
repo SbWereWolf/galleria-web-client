@@ -1,5 +1,8 @@
 <template>
-  <BaseH1 size="large" :customStyles="{ paddingBottom: '60px', textAlign:'center' }">Выберите художника</BaseH1>
+  <BaseH1 size="large" :customStyles="{ paddingBottom: '60px', textAlign:'center' }"
+  >
+    Создать ваучер
+  </BaseH1>
   <div class="centerCart">
     <BaseP size="large">Количество картин</BaseP>
     <BaseInput :customStyles="{ paddingBottom: '30px' }"/>

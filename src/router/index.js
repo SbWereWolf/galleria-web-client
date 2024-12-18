@@ -3,7 +3,7 @@ import {useAuthStore} from '../stores/auth';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import CustomerCabinet from '@/views/CustomerCabinet.vue';
+import CustomerCabinet from '@/views/CustomerCabinetView.vue';
 import ArtistCabinetView from '@/views/ArtistCabinetView.vue';
 
 const routes = [

@@ -35,7 +35,8 @@ const findUser = async () => {
 
   try {
     const response = await window.fetch(
-      import.meta.env.VITE_API_SERVER + `/users/${searchQuery.value}`, {
+      import.meta.env.VITE_API_SERVER
+      + `/Accounts/show/?login=${searchQuery.value}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -133,20 +134,23 @@ onMounted(async () => {
 </script>
 
 <template>
-  <BaseH1 size="large" :customStyles="{ paddingBottom: '60px', textAlign: 'center' }">
+  <BaseH1 size="large"
+          :customStyles="{ paddingBottom: '60px', textAlign: 'center' }">
     Найдите посетителя
   </BaseH1>
   <div class="centerCart">
     <BaseP size="large">Найти по логину</BaseP>
     <SearchInput v-model="searchQuery"/>
-    <BaseButton size="large" variant="primary60" @click="findUser" :disabled="isButtonDisabled">
+    <BaseButton size="large" variant="primary60" @click="findUser"
+                :disabled="isButtonDisabled">
       Найти
     </BaseButton>
   </div>
 
 
   <div v-if="user">
-    <BaseCard :avatar="user.avatar_url" :name="user.username" :login="user.username" :id="user.id" :style="user.style"
+    <BaseCard :avatar="user.avatar_url" :name="user.username"
+              :login="user.username" :id="user.id" :style="user.style"
               :addres="user.adres" :role="user.role"/>
   </div>
 
