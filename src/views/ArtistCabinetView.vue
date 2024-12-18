@@ -56,7 +56,7 @@ const activeSectionComponent = computed(() => {
   } else if (activeSection.value === 'SearchVoucher') {
     return defineAsyncComponent(() => import('@/views/SearchVoucherView.vue'));
   } else if (activeSection.value === 'ShowVoucher') {
-    return defineAsyncComponent(() => import('@/views/ShowVoucherView.vue'));
+    return defineAsyncComponent(() => import('@/views/ShowVoucherVisitorView.vue'));
   } else {
     return null;
   }
