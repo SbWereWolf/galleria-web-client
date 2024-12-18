@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container1">
     <span class="id">ID: {{ artwork.id }}</span>
     <div class="frame-1">
       <div class="frame-2">
@@ -12,11 +12,23 @@
       </div>
       <div class="frame-4">
         <span class="text-6">Кол-во:</span>
-        <span class="text-7">{{ artwork.quantity }}</span>
+        <span class="text-7">{{ artwork.amount_pictures }}</span>
       </div>
       <div class="section-2">
         <span class="text-8">Цена:</span>
         <span class="text-9">{{ artwork.price }} ₽</span>
+      </div>
+      <div class="frame-3">
+        <span class="style">Заказчик:</span>
+        <span class="realism">{{ artwork.customer }}</span>
+      </div>
+      <div class="frame-3">
+        <span class="style">Исполнитель:</span>
+        <span class="realism">{{ artwork.executor }}</span>
+      </div>
+      <div class="frame-3">
+        <span class="style">Состояние:</span>
+        <span class="realism">{{ artwork.status }}</span>
       </div>
     </div>
   </div>
@@ -36,6 +48,19 @@ defineProps({
 
 
 <style scoped>
+.main-container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 40px;
+  position: relative;
+  width: 804px;
+  margin: 0 auto;
+  padding: 25px 40px 25px 40px;
+  border: 1px solid #cecbc7;
+  border-radius: 20px;
+}
 .id {
   align-self: stretch;
   flex-shrink: 0;

@@ -6,70 +6,168 @@
   </BaseH1>
 
   <div class="centerCart">
-    <!-- Селект для стилей -->
-    <BaseP size="large">Стиль</BaseP>
-    <CustomSelectWithCheckboxes :options="styleOptions" listId="style" v-model="selectedValues.style"/>
-    <p>Выбранные стили: {{ selectedStyleLabels }}</p>
+    <form @submit.prevent="search">
+      <BaseP size="large">Стиль</BaseP>
+      <fieldset>
+        <CheckboxWithLabel
+          id="realism" label="realism" v-model="data.realism"/>
+        <CheckboxWithLabel
+          id="impressionism"
+          label="impressionism"
+          v-model="data.impressionism"
+        />
+        <CheckboxWithLabel
+          id="fauvism" label="fauvism" v-model="data.fauvism"/>
+        <CheckboxWithLabel
+          id="modern" label="modern" v-model="data.modern"/>
+        <CheckboxWithLabel
+          id="expressionism"
+          label="expressionism"
+          v-model="data.expressionism"
+        />
+        <CheckboxWithLabel
+          id="cubism" label="cubism" v-model="data.cubism"/>
+        <CheckboxWithLabel
+          id="futurism" label="futurism" v-model="data.futurism"/>
+        <CheckboxWithLabel
+          id="abstractionism"
+          label="abstractionism"
+          v-model="data.abstractionism"
+        />
+        <CheckboxWithLabel
+          id="dadaism" label="dadaism" v-model="data.dadaism"/>
+        <CheckboxWithLabel
+          id="pop_art" label="pop_art" v-model="data.pop_art"/>
+      </fieldset>
+      <BaseP size="large">Статус</BaseP>
+      <fieldset>
+        <CheckboxWithLabel
+          id="realism" label="placed" v-model="data.placed"/>
+        <CheckboxWithLabel
+          id="fauvism" label="in work" v-model="data.in_work"/>
+        <CheckboxWithLabel
+          id="modern" label="ready" v-model="data.ready"/>
+      </fieldset>
+      <BaseButton size="large" variant="primary60">Найти</BaseButton>
+    </form>
 
-    <!-- Селект для статусов -->
-    <BaseP size="large">Статус</BaseP>
-    <CustomSelectWithCheckboxes :options="statusOptions" listId="status" v-model="selectedValues.status"/>
-    <p>Выбранные статусы: {{ selectedStatusLabels }}</p>
-
-    <BaseButton size="large" variant="primary60">Найти</BaseButton>
+    <div v-if="data.voucher_collection">
+      <VoucherCard
+        v-for="(voucher, index) in data.voucher_collection"
+        :key="index"
+        :artwork="voucher"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
-import {computed, onMounted, } from 'vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
-import CustomSelectWithCheckboxes from '@/components/UI/Select/CustomSelectWithCheckboxes.vue';
-import {useCheckboxStore} from '../stores/checkboxStore';
+import CheckboxWithLabel from "@/components/UI/Checkbox/CheckboxWithLabel.vue";
+import axios from "axios";
+import {reactive} from "vue";
+import VoucherCard from "@/components/UI/Card/VoucherCard.vue";
 
-// Доступ к состоянию чекбоксов
-const checkboxStore = useCheckboxStore();
-// Реактивное хранилище выбранных значений
-const selectedValues = computed(() => checkboxStore.selectedValues);
+const data = reactive({
+  voucher_collection: [],
+  realism: false,
+  impressionism: false,
+  fauvism: false,
+  modern: false,
+  expressionism: false,
+  cubism: false,
+  futurism: false,
+  abstractionism: false,
+  dadaism: false,
+  pop_art: false,
+  placed: false,
+  in_work: false,
+  ready: false,
+})
 
-// Опции для стилей
-const styleOptions = [
-  {value: "modern", label: "Современный"},
-  {value: "classic", label: "Классический"},
-  {value: "abstract", label: "Абстрактный"},
-  {value: "dadizm", label: "Дадизм"},
-];
+const search = async () => {
+  try {
+    const token = window.localStorage.getItem('jwtToken');
+    if (!token) {
+      window.console.error('Токен отсутствует');
+      return;
+    }
 
-// Опции для статусов
-const statusOptions = [
-  {value: "new", label: "Новый"},
-  {value: "popular", label: "Популярный"},
-  {value: "featured", label: "Рекомендуемый"},
-];
+    data.voucher_collection=[];
 
-// Реактивные метки для выбранных значений
-const selectedStyleLabels = computed(() => {
-  const selectedKeys = selectedValues.value.style || [];
-  return selectedKeys
-    .map(key => styleOptions.find(option => option.value === key)?.label)
-    .filter(Boolean)
-    .join(", ");
-});
+    let query = [];
 
-const selectedStatusLabels = computed(() => {
-  const selectedKeys = selectedValues.value.status || [];
-  return selectedKeys
-    .map(key => statusOptions.find(option => option.value === key)?.label)
-    .filter(Boolean)
-    .join(", ");
-});
+    const selectedStyles = [];
+    if (data.realism) {
+      selectedStyles.push('realism')
+    }
+    if (data.impressionism) {
+      selectedStyles.push('impressionism')
+    }
+    if (data.fauvism) {
+      selectedStyles.push('fauvism')
+    }
+    if (data.modern) {
+      selectedStyles.push('modern')
+    }
+    if (data.expressionism) {
+      selectedStyles.push('expressionism')
+    }
+    if (data.cubism) {
+      selectedStyles.push('cubism')
+    }
+    if (data.futurism) {
+      selectedStyles.push('futurism')
+    }
+    if (data.abstractionism) {
+      selectedStyles.push('abstractionism')
+    }
+    if (data.dadaism) {
+      selectedStyles.push('dadaism')
+    }
+    if (data.pop_art) {
+      selectedStyles.push('pop_art')
+    }
+    let styles =
+      selectedStyles.join('&style=');
+    if (styles) {
+      styles = `style=${styles}`
+      query.push(styles)
+    }
 
-onMounted(() => {
-  // Устанавливаем предустановленные значения (если нужно)
-  checkboxStore.selectedValues = {
-    style: [],
-    status: [],
-  };
-});
+    const selectedStatuses = [];
+    if (data.placed) {
+      selectedStatuses.push('placed')
+    }
+    if (data.in_work) {
+      selectedStatuses.push('in work')
+    }
+    if (data.ready) {
+      selectedStatuses.push('ready')
+    }
+    let statuses =
+      selectedStatuses.join('&status=');
+    if (statuses) {
+      statuses = `status=${statuses}`
+      query.push(statuses)
+    }
+    const queryString = query.join('&');
+
+
+    const response = await axios.get(
+      `/Vouchers/list?${queryString}`, {
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+    window.console.log('Результаты поиска:', response.data);
+    data.voucher_collection = response.data;
+  } catch (error) {
+    window.console.error('Ошибка при поиске:', error);
+  }
+};
 </script>
