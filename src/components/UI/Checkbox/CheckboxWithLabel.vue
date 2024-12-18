@@ -1,8 +1,5 @@
 <template>
   <div class="checkbox-with-label">
-    <label :for="id" class="label">
-      <slot>{{ label }}</slot>
-    </label>
     <input
       type="checkbox"
       :id="id"
@@ -10,7 +7,9 @@
       @change="$emit('update:modelValue', $event.target.checked)"
       class="checkbox"
     />
-
+    <label :for="id" class="label">
+      <slot>{{ label }}</slot>
+    </label>
   </div>
 </template>
 

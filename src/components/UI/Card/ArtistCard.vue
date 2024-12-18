@@ -1,6 +1,5 @@
 <script setup>
 import {defineProps} from 'vue';
-import BaseButton from '../Button/BaseButton.vue';
 
 defineProps({
   avatar: String,
@@ -8,7 +7,7 @@ defineProps({
   login: String,
   id: String,
   style: String,
-  addres: String,
+  address: String,
   role: String,
 });
 
@@ -35,18 +34,11 @@ defineProps({
       <div class="wrapper-3">
         <span class="id">ID:</span><span class="text-5">{{ id }}</span>
       </div>
-      <div class="frame" v-if="role !== 'visitor'">
+      <div class="frame">
         <span class="style">Стиль:</span>
         <span class="abstractionism">{{ style }}</span>
-
-      </div>
-      <div class="frame" v-if="role == 'visitor'">
-        <span class="style">Адресс:</span>
-        <span class="abstractionism">{{ addres }}</span>
-
       </div>
     </div>
-    <BaseButton size="large" variant="primary60">Посмотреть контакты</BaseButton>
   </div>
 </template>
 
@@ -56,9 +48,8 @@ defineProps({
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 40px;
   position: relative;
-  width: 804px;
+  width: 400px;
   margin: 0 auto;
   padding: 25px 40px 25px 40px;
   border: 1px solid #cecbc7;

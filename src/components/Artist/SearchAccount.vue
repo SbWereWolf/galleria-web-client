@@ -4,7 +4,7 @@ import SearchInput from '@/components/UI/Input/SearchInput.vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
-import BaseCard from '@/components/UI/Card/BaseCard.vue'; // Подключение BaseCard
+import AccountCard from '@/components/UI/Card/AccountCard.vue';
 
 import {useAuthStore} from '@/stores/auth';
 import axios from "axios";
@@ -150,9 +150,9 @@ onMounted(async () => {
 
 
   <div v-if="user">
-    <BaseCard :avatar="user.avatar_url" :name="user.username"
+    <AccountCard :avatar="user.avatar_url" :name="user.username"
               :login="user.username" :id="user.id" :style="user.style"
-              :addres="user.adres" :role="user.role"/>
+              :address="user.adres" :role="user.role"/>
   </div>
 
   <div v-else-if="userNotFound" class="error-message">

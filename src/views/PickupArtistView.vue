@@ -9,46 +9,35 @@
 
     <form>
       <fieldset>
-        <div>
-          <input type="checkbox" id="realism" v-model="data.realism"/>
-          <label for="realism">{{ data.realism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="impressionism" v-model="data.impressionism"/>
-          <label for="impressionism">{{ data.impressionism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="fauvism" v-model="data.fauvism"/>
-          <label for="fauvism">{{ data.fauvism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="modern" v-model="data.modern"/>
-          <label for="modern">{{ data.modern }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="expressionism" v-model="data.expressionism"/>
-          <label for="expressionism">{{ data.expressionism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="cubism" v-model="data.cubism"/>
-          <label for="cubism">{{ data.cubism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="futurism" v-model="data.futurism"/>
-          <label for="futurism">{{ data.futurism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="abstractionism" v-model="data.abstractionism"/>
-          <label for="abstractionism">{{ data.abstractionism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="dadaism" v-model="data.dadaism"/>
-          <label for="dadaism">{{ data.dadaism }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="pop-art" v-model="data.pop_art"/>
-          <label for="pop-art">{{ data.pop_art }}</label>
-        </div>
+        <CheckboxWithLabel
+          id="realism" label="realism" v-model="data.realism"/>
+        <CheckboxWithLabel
+          id="impressionism"
+          label="impressionism"
+          v-model="data.impressionism"
+        />
+        <CheckboxWithLabel
+          id="fauvism" label="fauvism" v-model="data.fauvism"/>
+        <CheckboxWithLabel
+          id="modern" label="modern" v-model="data.modern"/>
+        <CheckboxWithLabel
+          id="expressionism"
+          label="expressionism"
+          v-model="data.expressionism"
+        />
+        <CheckboxWithLabel
+          id="cubism" label="cubism" v-model="data.cubism"/>
+        <CheckboxWithLabel
+          id="futurism" label="futurism" v-model="data.futurism"/>
+        <CheckboxWithLabel
+          id="abstractionism"
+          label="abstractionism"
+          v-model="data.abstractionism"
+        />
+        <CheckboxWithLabel
+          id="dadaism" label="dadaism" v-model="data.dadaism"/>
+        <CheckboxWithLabel
+          id="pop_art" label="pop_art" v-model="data.pop_art"/>
       </fieldset>
     </form>
 
@@ -58,9 +47,12 @@
     </BaseButton>
   </div>
 
-  <BaseCard :avatar="user.avatar_url" :name="user.username"
-            :login="user.username" :id="user.id" :style="user.style"
-            :addres="user.adres" :role="user.role"/>
+  <div v-if="data.artist_collection">
+    <ArtistCard
+      v-for="(artist, index) in data.artist_collection"
+      :key="index"
+      :login="artist.login" :id="artist.id" :style="artist.style"/>
+  </div>
 
 </template>
 <script setup>
@@ -68,10 +60,12 @@ import {reactive} from 'vue';
 import BaseH1 from '@/components/UI/H/BaseH1.vue';
 import BaseP from '@/components/UI/P/BaseP.vue';
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
-import BaseCard from '@/components/UI/Card/BaseCard.vue';
 import axios from "axios";
+import CheckboxWithLabel from "@/components/UI/Checkbox/CheckboxWithLabel.vue";
+import ArtistCard from "@/components/UI/Card/ArtistCard.vue";
 
 const data = reactive({
+  artist_collection: [],
   realism: false,
   impressionism: false,
   fauvism: false,
@@ -136,6 +130,7 @@ const handleSearch = async () => {
       });
 
     window.console.log('Результаты поиска:', response.data);
+    data.artist_collection = response.data;
   } catch (error) {
     window.console.error('Ошибка при поиске:', error);
   }
