@@ -24,17 +24,17 @@ const findUser = async () => {
   isButtonDisabled.value = true;
 
   if (!authStore.isAuthenticated) {
-    alert('Вы не авторизованы!');
+    window.alert('Вы не авторизованы!');
     return;
   }
-  const token = localStorage.getItem('jwtToken');
+  const token = window.localStorage.getItem('jwtToken');
   if (!token) {
-    console.error('Токен отсутствует');
+    window.console.error('Токен отсутствует');
     return;
   }
 
   try {
-    const response = await fetch(
+    const response = await window.fetch(
       import.meta.env.VITE_API_SERVER + `/users/${searchQuery.value}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,21 +46,21 @@ const findUser = async () => {
     }
 
     const result = await response.json();
-    console.log('result', result);
+    window.console.log('result', result);
     role.value = result.role || 'guest'; // Устанавливаем значение роли
 
     if (role.value === 'artist') {
       await loadArtistStyles(result.username);
-      console.log('result loadArtistStyles', result.username)
+      window.console.log('result loadArtistStyles', result.username)
     }
     if (result && Object.keys(result).length) {
-      console.log('Role:', role.value);
-      console.log('Updating user with:', {
+      window.console.log('Role:', role.value);
+      window.console.log('Updating user with:', {
         ...result,
         style: role.value === 'artist' && styles.value.length > 0 ? styles.value.join(', ') : null,
         adres: role.value === 'visitor' ? result.adres : null,
       });
-      console.log('result Object.keys(result).length', result)
+      window.console.log('result Object.keys(result).length', result)
       user.value = {
         ...result,
         style: role.value === 'artist' && styles.value.length > 0 ? styles.value.join(', ') : null,
@@ -68,8 +68,8 @@ const findUser = async () => {
       };
 
 
-      console.log('user style:', user.value.style);
-      console.log('user adres:', user.value.adres);
+      window.console.log('user style:', user.value.style);
+      window.console.log('user adres:', user.value.adres);
 
       userNotFound.value = false;
 
@@ -80,7 +80,7 @@ const findUser = async () => {
       userNotFound.value = true;
     }
   } catch (error) {
-    console.error('Ошибка:', error);
+    window.console.error('Ошибка:', error);
     user.value = null;
     role.value = null;
     userNotFound.value = true;
@@ -91,9 +91,9 @@ const findUser = async () => {
 
 const loadArtistStyles = async (username) => {
   try {
-    const token = localStorage.getItem('jwtToken');
+    const token = window.localStorage.getItem('jwtToken');
     if (!token) {
-      console.error('Токен отсутствует');
+      window.console.error('Токен отсутствует');
       return;
     }
 
@@ -110,16 +110,16 @@ const loadArtistStyles = async (username) => {
     }
 
     const data = await response.json();
-    console.log('styles загружены:', data);
+    window.console.log('styles загружены:', data);
     if (Array.isArray(data.styles)) {
       styles.value = [...data.styles];
     } else {
       styles.value = [];
     }
 
-    console.log('styles после записи:', styles.value);
+    window.console.log('styles после записи:', styles.value);
   } catch (error) {
-    console.error('Ошибка загрузки стилей артиста:', error);
+    window.console.error('Ошибка загрузки стилей артиста:', error);
     styles.value = [];
   }
 };

@@ -69,13 +69,13 @@ watch(selectedValues, (newValue) => {
 
 
 onMounted(async () => {
-  const token = localStorage.getItem('jwtToken');
+  const token = window.localStorage.getItem('jwtToken');
   if (!token) {
-    console.error('Токен отсутствует');
+    window.console.error('Токен отсутствует');
     return;
   }
 
-  const userResponse = await fetch(
+  const userResponse = await window.fetch(
     import.meta.env.VITE_API_SERVER + '/Accounts/me/'
     , {
       headers: {

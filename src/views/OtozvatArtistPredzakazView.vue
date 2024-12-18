@@ -16,7 +16,7 @@ const artworkData = ref({});
 import BaseButton from '@/components/UI/Button/BaseButton.vue';
 
 // onMounted(async () => {
-//   const response = await fetch('/api/artwork/55468255');
+//   const response = await window.fetch('/api/artwork/55468255');
 //   artworkData.value = await response.json();
 // });
 </script>

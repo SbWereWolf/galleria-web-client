@@ -52,16 +52,16 @@ const activeSection = ref(''); // По умолчанию ничего не вы
 // const myImg ="src/assets/home.png"
 // Обработчики кликов
 const handleSettingsClick = () => {
-  console.log('Открыть настройки пользователя');
+  window.console.log('Открыть настройки пользователя');
 };
 
 const handleNotificationsClick = () => {
-  console.log('Показать уведомления');
+  window.console.log('Показать уведомления');
 };
 
 const handleArrowClick = (section) => {
   activeSection.value = section; // Устанавливаем активную секцию
-  console.log(`Клик по стрелке: ${section}`);
+  window.console.log(`Клик по стрелке: ${section}`);
 };
 
 

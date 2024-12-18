@@ -107,7 +107,7 @@ const checkPasswords = () => {
 // Функция для обработки регистрации и отправки данных на сервер
 const handleRegistration = async () => {
   if (passwordError.value) {
-    console.log('Пароли не совпадают. Пожалуйста, проверьте введенные данные.');
+    window.console.log('Пароли не совпадают. Пожалуйста, проверьте введенные данные.');
     return;
   }
 
@@ -131,12 +131,12 @@ const handleRegistration = async () => {
     sex: isCheckedM.value ? 'm' : (isCheckedW.value ? 'f' : ''),
     type_role: selectedRole.value,
   };
-  console.log(userData)
+  window.console.log(userData)
 
   let response = {}
   try {
     // Отправляем POST запрос на сервер
-    response = await fetch(
+    response = await window.fetch(
       import.meta.env.VITE_API_SERVER + '/Accounts', {
         method: 'POST',
         headers: {
@@ -146,19 +146,19 @@ const handleRegistration = async () => {
 
       });
   } catch (error) {
-    console.log(userData);
-    console.error('Ошибка при отправке данных:', error);
+    window.console.log(userData);
+    window.console.error('Ошибка при отправке данных:', error);
   }
 
   if (!response.ok) {
     const error = await response.json();
-    console.error('Ошибка регистрации:', error);
+    window.console.error('Ошибка регистрации:', error);
   }
 
   if (response.ok) {
     const data = await response.json();
-    console.log('Регистрация успешна', data);
-    alert('Спасибо за регистрацию теперь вы можете войти по email и паролю')
+    window.console.log('Регистрация успешна', data);
+    window.alert('Спасибо за регистрацию теперь вы можете войти по email и паролю')
   }
 };
 </script>

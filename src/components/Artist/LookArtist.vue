@@ -50,9 +50,9 @@ onMounted(async () => {
 // Функция для загрузки стилей из API
 const loadStyleOptions = async () => {
   try {
-    const token = localStorage.getItem('jwtToken');
+    const token = window.localStorage.getItem('jwtToken');
     if (!token) {
-      console.error('Токен отсутствует');
+      window.console.error('Токен отсутствует');
       return;
     }
 
@@ -70,10 +70,10 @@ const loadStyleOptions = async () => {
         selected: false,
       }));
     } else {
-      console.error('Ошибка при загрузке стилей');
+      window.console.error('Ошибка при загрузке стилей');
     }
   } catch (error) {
-    console.error('Ошибка при загрузке данных:', error);
+    window.console.error('Ошибка при загрузке данных:', error);
   }
 };
 
@@ -83,9 +83,9 @@ const styleValues = computed(() => selectedValues.style || []); // Исполь�
 // Выполнение поиска с использованием выбранных значений
 const handleSearch = async () => {
   try {
-    const token = localStorage.getItem('jwtToken');
+    const token = window.localStorage.getItem('jwtToken');
     if (!token) {
-      console.error('Токен отсутствует');
+      window.console.error('Токен отсутствует');
       return;
     }
 
@@ -101,9 +101,9 @@ const handleSearch = async () => {
         },
       });
 
-    console.log('Результаты поиска:', response.data);
+    window.console.log('Результаты поиска:', response.data);
   } catch (error) {
-    console.error('Ошибка при поиске:', error);
+    window.console.error('Ошибка при поиске:', error);
   }
 };
 

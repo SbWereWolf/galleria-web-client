@@ -13,14 +13,14 @@ export const useAuthStore =
     actions: {
       // Инициализация авторизации при загрузке приложения
       async initializeAuth() {
-        const token = localStorage.getItem('jwtToken');
+        const token = window.localStorage.getItem('jwtToken');
         if (token && this.isTokenValid(token)) {
           this.isAuthenticated = true;
           try {
             // Загрузка данных пользователя
             await this.fetchUserData(token);
           } catch (error) {
-            console.error('Ошибка при инициализации авторизации:', error);
+            window.console.error('Ошибка при инициализации авторизации:', error);
             this.logout();
           }
         } else {
@@ -33,13 +33,13 @@ export const useAuthStore =
       isTokenValid(token) {
         try {
           const decoded = jwt_decode(token);
-          console.log(decoded);
+          window.console.log(decoded);
           const currentTime = Date.now() / 1000;
           // Токен валиден, если его срок не истёк
           return decoded.exp > currentTime;
 
         } catch (error) {
-          console.error('Ошибка декодирования токена:', error);
+          window.console.error('Ошибка декодирования токена:', error);
           return false;
         }
       },
@@ -52,7 +52,7 @@ export const useAuthStore =
           this.role = decoded.role || null; // Сохраняем роль из токена
           this.userId = decoded.user_id || null;
 
-          response = await fetch(
+          response = await window.fetch(
             import.meta.env.VITE_API_SERVER + '/Accounts/me/', {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -64,13 +64,13 @@ export const useAuthStore =
             this.user = data; // Сохраняем данные пользователя
           }
         } catch (error) {
-          console.error(
+          window.console.error(
             'Ошибка при загрузке данных пользователя:',
             error
           );
         }
         if (!response.ok) {
-          console.error(
+          window.console.error(
             'Ошибка при получении данных пользователя:',
             response.statusText
           );
@@ -80,17 +80,17 @@ export const useAuthStore =
       // Логин пользователя
       login(token) {
         // Сохранить токен в localStorage
-        localStorage.setItem('jwtToken', token);
+        window.localStorage.setItem('jwtToken', token);
         this.isAuthenticated = true;
         this.fetchUserData(token).catch((error) => {
-          console.error('Ошибка при входе пользователя:', error);
+          window.console.error('Ошибка при входе пользователя:', error);
           this.logout();
         });
       },
 
       // Логаут пользователя
       logout() {
-        localStorage.removeItem('jwtToken');
+        window.localStorage.removeItem('jwtToken');
         this.isAuthenticated = false;
         this.user = null;
         this.role = null;

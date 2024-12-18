@@ -55,7 +55,7 @@ const handleLogin = async () => {
       login: login.value,
       password: password.value
     };
-    response = await fetch(
+    response = await window.fetch(
       import.meta.env.VITE_API_SERVER + '/Accounts/log_in',
       {
         method: 'POST',
@@ -66,7 +66,7 @@ const handleLogin = async () => {
       });
 
   } catch (error) {
-    console.error('Ошибка при отправке данных:', error);
+    window.console.error('Ошибка при отправке данных:', error);
     loginError.value = true;
   } finally {
     isLoading.value = false;
@@ -74,18 +74,18 @@ const handleLogin = async () => {
 
   if (!response.ok) {
     loginError.value = true;
-    console.error('Ошибка авторизации');
+    window.console.error('Ошибка авторизации');
   }
 
   let userResponse = {}
   if (response.ok) {
     const data = await response.json();
-    localStorage.setItem('jwtToken', data.session_id);
+    window.localStorage.setItem('jwtToken', data.session_id);
 
     isLoading.value = true;
     try {
       // Теперь нам нужно получить информацию о пользователе
-      userResponse = await fetch(
+      userResponse = await window.fetch(
         import.meta.env.VITE_API_SERVER + '/Accounts/me/'
         , {
           headers: {
@@ -93,7 +93,7 @@ const handleLogin = async () => {
           },
         });
     } catch (error) {
-      console.error('Ошибка при отправке данных:', error);
+      window.console.error('Ошибка при отправке данных:', error);
       loginError.value = true;
     } finally {
       isLoading.value = false;
@@ -102,12 +102,12 @@ const handleLogin = async () => {
 
   if (!userResponse.ok) {
     loginError.value = true;
-    console.error('Ошибка при получении данных пользователя');
+    window.console.error('Ошибка при получении данных пользователя');
   }
 
   if (userResponse.ok) {
 
-    console.debug('userResponse.ok -  obtain userData');
+    window.console.debug('userResponse.ok -  obtain userData');
 
     const userData = await userResponse.json();
 
@@ -117,12 +117,12 @@ const handleLogin = async () => {
 
     // В зависимости от роли, редиректим на нужную страницу
     if (authStore.user.role === 'artist') {
-      console.debug('редиректим на нужную страницу Кабинет художника');
+      window.console.debug('редиректим на нужную страницу Кабинет художника');
       router.push('/artist'); // Кабинет художника
     }
 
     if (authStore.user.role !== 'artist') {
-      console.debug('редиректим на нужную страницу Кабинет клиента');
+      window.console.debug('редиректим на нужную страницу Кабинет клиента');
       router.push('/cabinet'); // Кабинет клиента
     }
   }

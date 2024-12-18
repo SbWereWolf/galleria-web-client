@@ -196,14 +196,14 @@ watch([() => userData.value.password, () => userData.value.confirmPassword], che
 
 const saveSettings = async () => {
   if (passwordError.value) {
-    console.log('Пароли не совпадают');
+    window.console.log('Пароли не совпадают');
     return;
   }
 
   try {
-    const token = localStorage.getItem('jwtToken');
+    const token = window.localStorage.getItem('jwtToken');
     if (!token) {
-      console.error('Токен отсутствует');
+      window.console.error('Токен отсутствует');
       return;
     }
 
@@ -249,9 +249,9 @@ const saveSettings = async () => {
     const modal = Modal.getInstance(modalElement);
     modal.hide();
 
-    console.log('Настройки сохранены');
+    window.console.log('Настройки сохранены');
   } catch (error) {
-    console.error('Ошибка при сохранении настроек:', error);
+    window.console.error('Ошибка при сохранении настроек:', error);
   }
 };
 
@@ -274,9 +274,9 @@ const styles = ref([]); // Массив для хранения стилей а�
 // Загрузка данных пользователя
 const loadUserData = async () => {
   try {
-    const token = localStorage.getItem('jwtToken');
+    const token = window.localStorage.getItem('jwtToken');
     if (!token) {
-      console.error('Токен отсутствует');
+      window.console.error('Токен отсутствует');
       return;
     }
 
@@ -292,15 +292,15 @@ const loadUserData = async () => {
 
     // Сохраняем id пользователя в Pinia
     userStore1.setUserId(user.id);  // Сохраняем id в хранилище Pinia
-    console.log('userId сохранен в Pinia:', userStore1.userId);
+    window.console.log('userId сохранен в Pinia:', userStore1.userId);
 
     // Дополнительные данные, которые можно сохранить
     userStore1.userName = user.username || '';
     userStore1.role = user.role || 'Роль не указана';
-    console.log('userData', user)
+    window.console.log('userData', user)
 
     userData.value.last_name = user.last_name || '';
-    console.log('userData.last_name', userData.value.last_name);
+    window.console.log('userData.last_name', userData.value.last_name);
     userData.value.first_name = user.first_name || '';
     userData.value.middle_name = user.middle_name || '';
     userData.value.phone_number = user.phone_number || '';
@@ -320,16 +320,16 @@ const loadUserData = async () => {
       await loadArtistStyles(user.username);
     }
   } catch (error) {
-    console.error('Ошибка загрузки данных пользователя:', error);
+    window.console.error('Ошибка загрузки данных пользователя:', error);
   }
 };
 
 // Загрузка стилей артиста
 const loadArtistStyles = async (username) => {
   try {
-    const token = localStorage.getItem('jwtToken');
+    const token = window.localStorage.getItem('jwtToken');
     if (!token) {
-      console.error('Токен отсутствует');
+      window.console.error('Токен отсутствует');
       return;
     }
 
@@ -339,11 +339,11 @@ const loadArtistStyles = async (username) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('data', response.data)
+    window.console.log('data', response.data)
     styles.value = response.data || [];
-    console.log(styles.value)
+    window.console.log(styles.value)
   } catch (error) {
-    console.error('Ошибка загрузки стилей артиста:', error);
+    window.console.error('Ошибка загрузки стилей артиста:', error);
   }
 };
 
@@ -365,12 +365,12 @@ onMounted(async () => {
   const username = authStore.user.username;
 
   if (!username) {
-    console.error('Имя пользователя отсутствует');
+    window.console.error('Имя пользователя отсутствует');
     return;
   }
-  const token = localStorage.getItem('jwtToken');
+  const token = window.localStorage.getItem('jwtToken');
   if (!token) {
-    console.error('Токен отсутствует');
+    window.console.error('Токен отсутствует');
     return;
   }
 
@@ -390,11 +390,11 @@ onMounted(async () => {
         selected: false,
       }));
     } else {
-      console.error('Ошибка: данные не содержат массив доступных стилей');
+      window.console.error('Ошибка: данные не содержат массив доступных стилей');
       return;
     }
   } catch (error) {
-    console.error('Ошибка при загрузке данных:', error);
+    window.console.error('Ошибка при загрузке данных:', error);
   }
 
   const role = authStore.user.role;
@@ -409,7 +409,7 @@ onMounted(async () => {
           },
         });
 
-      console.log('selectedResponse onMounted', selectedResponse);
+      window.console.log('selectedResponse onMounted', selectedResponse);
 
       if (selectedResponse.data && Array.isArray(selectedResponse.data.styles)) {
         // Обновляем `selected` для каждого стиля
@@ -425,10 +425,10 @@ onMounted(async () => {
         // Сохраняем выбранные значения для передачи в компонент
         selectedValues.value.style = selectedResponse.data.styles.join(', ');
       } else {
-        console.error('Ошибка: данные не содержат массив выбранных стилей', selectedResponse.data);
+        window.console.error('Ошибка: данные не содержат массив выбранных стилей', selectedResponse.data);
       }
     } catch (error) {
-      console.error('Ошибка при загрузке данных:', error);
+      window.console.error('Ошибка при загрузке данных:', error);
     }
   }
 

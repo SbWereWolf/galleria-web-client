@@ -2,7 +2,7 @@ import {defineStore} from 'pinia';
 
 export const useMyUserStore = defineStore('userStore', {
   state: () => ({
-    token: localStorage.getItem('jwtToken') || null,
+    token: window.localStorage.getItem('jwtToken') || null,
     role: null, // Храним роль здесь
     user: null, // Данные пользователя
     id: null,
@@ -19,14 +19,14 @@ export const useMyUserStore = defineStore('userStore', {
     },
     setToken(token) {
       this.token = token;
-      localStorage.setItem('jwtToken', token);
+      window.localStorage.setItem('jwtToken', token);
     },
     clearUser() {
       this.token = null;
       this.role = null;
       this.user = null;
       this.user_id = null;
-      localStorage.removeItem('jwtToken');
+      window.localStorage.removeItem('jwtToken');
     }
   }
 });

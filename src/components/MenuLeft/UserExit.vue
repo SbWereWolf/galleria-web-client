@@ -41,7 +41,7 @@ const onArrowClick = () => {
 
   const token = window.localStorage.getItem('jwtToken');
   if (!token) {
-    console.error('Токен отсутствует');
+    window.console.error('Токен отсутствует');
     return;
   }
 
@@ -53,7 +53,7 @@ const onArrowClick = () => {
         },
       })
   .catch(function (error) {
-    console.log(error);
+    window.console.log(error);
   });
 
   authStore.logout();
@@ -72,7 +72,7 @@ const onArrowClick = () => {
   flex-wrap: nowrap;
   position: relative;
   width: 548px;
-  margin: 0px 0 0 40px;
+  margin: 0 0 0 40px;
 }
 
 .frame-3 {
@@ -119,22 +119,4 @@ const onArrowClick = () => {
   z-index: 3;
 }
 
-.right-arrow {
-  flex-shrink: 0;
-  position: relative;
-  width: 40px;
-  height: 40px;
-  z-index: 4;
-  cursor: pointer;
-}
-
-.vector-4 {
-  position: relative;
-  width: 10px;
-  height: 18px;
-  margin: 11px 0 0 15px;
-  background: url(../../assets/images/arrow_right.png) no-repeat center;
-  background-size: cover;
-  z-index: 5;
-}
 </style>
