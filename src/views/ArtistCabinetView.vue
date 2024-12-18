@@ -14,7 +14,7 @@
       <UserContacts text="Изменить статус предзаказа" @arrow-click="handleArrowClick('createOrder')"/>
 
 
-      <UserExit text="выйти" :customMargin="'120px'" @arrow-click="handleArrowClick('revokeOrder')"/>
+      <UserExit text="выйти" :customMargin="'120px'"/>
     </div>
 
 

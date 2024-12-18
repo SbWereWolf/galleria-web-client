@@ -3,15 +3,10 @@
     <div class="frame-3" @click="onArrowClick">
       <!-- Текстовый контейнер -->
       <div>
-        <img src="/src/assets/images/exit.png" alt="">
+        <img src="/src/assets/images/exit.png" alt="log out">
       </div>
       <div class="text-container">
-
         <span class="artist-contacts">{{ text }}</span>
-      </div>
-      <!-- Правая стрелка -->
-      <div class="right-arrow">
-        <div class="vector-4"></div>
       </div>
     </div>
   </div>
@@ -19,12 +14,17 @@
 
 <script setup>
 import {defineProps, defineEmits} from 'vue';
+import {useAuthStore} from "@/stores/auth.js";
+import axios from "axios";
+import router from "@/router/index.js";
+
+const authStore = useAuthStore();
 
 // Пропсы
 defineProps({
   text: {
     type: String,
-    default: 'Посмотреть контакты конкретного художника', // Текст по умолчанию
+    default: 'Log out', // Текст по умолчанию
   },
   customMargin: {
     type: String,
@@ -38,6 +38,29 @@ const emit = defineEmits(['arrow-click']);
 // Обработчик клика по стрелке
 const onArrowClick = () => {
   emit('arrow-click'); // Генерация события
+
+  const token = window.localStorage.getItem('jwtToken');
+  if (!token) {
+    console.error('Токен отсутствует');
+    return;
+  }
+
+  axios.delete(
+      `/Accounts/log_out`, {
+        baseURL: import.meta.env.VITE_API_SERVER,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  authStore.logout();
+  window.alert('Сессия работы с личным кабинетом завершена.')
+  router.push({ path: '/' })
+
+
 };
 </script>
 
