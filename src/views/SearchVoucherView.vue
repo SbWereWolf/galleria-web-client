@@ -37,7 +37,7 @@
         <CheckboxWithLabel
           id="dadaism" label="dadaism" v-model="data.dadaism"/>
         <CheckboxWithLabel
-          id="pop_art" label="pop_art" v-model="data.pop_art"/>
+          id="pop_art" label="pop-art" v-model="data.pop_art"/>
       </fieldset>
       <BaseP size="large">Статус</BaseP>
       <fieldset>
@@ -128,7 +128,7 @@ const search = async () => {
       selectedStyles.push('dadaism')
     }
     if (data.pop_art) {
-      selectedStyles.push('pop_art')
+      selectedStyles.push('pop-art')
     }
     let styles =
       selectedStyles.join('&style=');
