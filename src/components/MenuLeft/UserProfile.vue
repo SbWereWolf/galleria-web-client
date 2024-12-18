@@ -368,14 +368,13 @@ onMounted(async () => {
     console.error('Имя пользователя отсутствует');
     return;
   }
+  const token = localStorage.getItem('jwtToken');
+  if (!token) {
+    console.error('Токен отсутствует');
+    return;
+  }
 
   try {
-    const token = localStorage.getItem('jwtToken');
-    if (!token) {
-      console.error('Токен отсутствует');
-      return;
-    }
-
     // Получение доступных стилей
     const stylesResponse = await axios.get('/Artists/styles/', {
       baseURL: import.meta.env.VITE_API_SERVER,
@@ -394,37 +393,46 @@ onMounted(async () => {
       console.error('Ошибка: данные не содержат массив доступных стилей');
       return;
     }
-
-    // Получение выбранных стилей пользователя
-    const selectedResponse = await axios.get(
-      `/Artists/${username}/styles/`, {
-        baseURL: import.meta.env.VITE_API_SERVER,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-    console.log('selectedResponse onMounted', selectedResponse);
-
-    if (selectedResponse.data && Array.isArray(selectedResponse.data.styles)) {
-      // Обновляем `selected` для каждого стиля
-      selectedResponse.data.styles.forEach(selectedStyle => {
-        const styleOption = styleOptions.value.find(
-          option => option.value === selectedStyle
-        );
-        if (styleOption) {
-          styleOption.selected = true;
-        }
-      });
-
-      // Сохраняем выбранные значения для передачи в компонент
-      selectedValues.value.style = selectedResponse.data.styles.join(', ');
-    } else {
-      console.error('Ошибка: данные не содержат массив выбранных стилей', selectedResponse.data);
-    }
   } catch (error) {
     console.error('Ошибка при загрузке данных:', error);
   }
+
+  const role = authStore.user.role;
+  if (role === 'artist') {
+    try {
+      // Получение выбранных стилей пользователя
+      const selectedResponse = await axios.get(
+        `/Artists/${username}/styles/`, {
+          baseURL: import.meta.env.VITE_API_SERVER,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+      console.log('selectedResponse onMounted', selectedResponse);
+
+      if (selectedResponse.data && Array.isArray(selectedResponse.data.styles)) {
+        // Обновляем `selected` для каждого стиля
+        selectedResponse.data.styles.forEach(selectedStyle => {
+          const styleOption = styleOptions.value.find(
+            option => option.value === selectedStyle
+          );
+          if (styleOption) {
+            styleOption.selected = true;
+          }
+        });
+
+        // Сохраняем выбранные значения для передачи в компонент
+        selectedValues.value.style = selectedResponse.data.styles.join(', ');
+      } else {
+        console.error('Ошибка: данные не содержат массив выбранных стилей', selectedResponse.data);
+      }
+    } catch (error) {
+      console.error('Ошибка при загрузке данных:', error);
+    }
+  }
+
+
 });
 
 
