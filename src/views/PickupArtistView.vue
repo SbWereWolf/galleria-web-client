@@ -42,7 +42,7 @@
     </form>
 
     <BaseButton
-      size="large" variant="primary60" @click="handleSearch">
+      size="large" variant="primary60" @click="pickupArtist">
       Найти
     </BaseButton>
   </div>
@@ -79,7 +79,7 @@ const data = reactive({
 })
 
 // Выполнение поиска с использованием выбранных значений
-const handleSearch = async () => {
+const pickupArtist = async () => {
   try {
     const token = window.localStorage.getItem('jwtToken');
     if (!token) {
